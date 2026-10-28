@@ -1,0 +1,39 @@
+name: Baglanti Testi
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/baglanti-testi.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instagram hesabini kontrol et
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          mkdir -p durum
+          if [ -z "$IG_TOKEN" ]; then
+            echo '{"sonuc":"HATA","mesaj":"IG_TOKEN kasada yok"}' > durum/baglanti.json
+          else
+            curl -s "https://graph.instagram.com/v21.0/me?fields=user_id,username,account_type&access_token=${IG_TOKEN}" \
+              | python3 -c 'import sys,json; d=json.load(sys.stdin); print(json.dumps({"sonuc":"OK" if "username" in d else "HATA", "username":d.get("username"), "account_type":d.get("account_type"), "hata":d.get("error",{}).get("message")}, ensure_ascii=False))' \
+              > durum/baglanti.json
+          fi
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > durum/son_test.txt
+          cat durum/baglanti.json
+
+      - name: Sonucu depoya yaz
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add durum/
+          git commit -m "Baglanti testi sonucu" || echo "degisiklik yok"
+          git push
