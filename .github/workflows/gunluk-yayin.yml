@@ -1,12 +1,20 @@
 name: Gunluk Yayin
 
+# Türkiye saatiyle: 13:00 gönderi, 20:30 Reel, 22:30 hikâye
+# (GitHub zamanlayıcısı birkaç dakika gecikebildiği için biraz erken kuruldu)
 on:
   schedule:
-    - cron: "25 17 * * *"   # her gün 20:25 (Türkiye)
+    - cron: "45 9 * * *"    # 12:45 -> gönderi
+    - cron: "15 17 * * *"   # 20:15 -> reel
+    - cron: "15 19 * * *"   # 22:15 -> hikâye
   workflow_dispatch:
+    inputs:
+      parca:
+        description: "gonderi / reel / hikaye / hepsi"
+        default: "hepsi"
   push:
     paths:
-      - "robot/tetik.txt"    # bu dosya değişince hemen yayın yap
+      - "robot/tetik.txt"    # bu dosya değişince eksik kalan her şeyi yayınla
 
 permissions:
   contents: write
@@ -22,68 +30,101 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Araçlar
+      - name: Hangi parça?
+        id: parca
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
-          pip install -q numpy pillow
+          case "${{ github.event.schedule }}" in
+            "45 9 * * *")  P=gonderi ;;
+            "15 17 * * *") P=reel ;;
+            "15 19 * * *") P=hikaye ;;
+            *) P="${{ github.event.inputs.parca || 'hepsi' }}" ;;
+          esac
+          echo "p=$P" >> $GITHUB_OUTPUT; echo "Parça: $P"
 
       - name: Bugünün içeriğini seç
         id: sec
+        env:
+          PARCA: ${{ steps.parca.outputs.p }}
         run: |
           python3 - <<'EOF'
           import json, os, datetime
           bugun = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%Y-%m-%d")
           takvim = json.load(open("icerik/takvim.json", encoding="utf-8"))
-          os.makedirs("durum", exist_ok=True)
           yol = "durum/yayinlanan.json"
           yapilan = json.load(open(yol)) if os.path.exists(yol) else []
-          bitti = {y["tarih"] for y in yapilan if y.get("reel_id") and y.get("hikaye_id") and y.get("gonderi_id")}
+          kayit = {}
+          for k in yapilan:
+              if k.get("tarih") == bugun:
+                  kayit.update({a: v for a, v in k.items() if a.endswith("_id")})
+          gerekli = {"gonderi": ["gonderi_id"], "reel": ["reel_id"], "hikaye": ["hikaye_id"],
+                     "hepsi": ["gonderi_id", "reel_id", "hikaye_id"]}[os.environ["PARCA"]]
           gun = next((g for g in takvim if g["tarih"] == bugun), None)
-          if gun is None or bugun in bitti:
-              print("Bugün için yayınlanacak içerik yok.")
-              open(os.environ["GITHUB_OUTPUT"], "a").write("var=hayir\n")
+          out = open(os.environ["GITHUB_OUTPUT"], "a")
+          if gun is None or all(a in kayit for a in gerekli):
+              print("Yapılacak iş yok.")
+              out.write("var=hayir\n")
           else:
               json.dump(gun, open("gun.json", "w", encoding="utf-8"), ensure_ascii=False)
-              open(os.environ["GITHUB_OUTPUT"], "a").write(f"var=evet\ntarih={bugun}\n")
+              out.write(f"var=evet\ntarih={bugun}\n")
           EOF
 
-      - name: Video ve kartı üret
+      - name: Medya hazır mı?
         if: steps.sec.outputs.var == 'evet'
-        run: python3 robot/uret.py gun.json cikti
-
-      - name: Kartı ve videoyu depoya koy
-        if: steps.sec.outputs.var == 'evet'
-        id: medya
+        id: hazir
         run: |
           T=${{ steps.sec.outputs.tarih }}
+          if [ -f medya/$T-reel.mp4 ] && [ -f medya/$T-kart.jpg ]; then echo "var=evet" >> $GITHUB_OUTPUT; else echo "var=hayir" >> $GITHUB_OUTPUT; fi
+
+      - name: Araçlar
+        if: steps.sec.outputs.var == 'evet' && steps.hazir.outputs.var == 'hayir'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q numpy pillow
+
+      - name: Video ve kartı üret, depoya koy
+        if: steps.sec.outputs.var == 'evet' && steps.hazir.outputs.var == 'hayir'
+        run: |
+          T=${{ steps.sec.outputs.tarih }}
+          python3 robot/uret.py gun.json cikti
           mkdir -p medya
           cp cikti/kart.jpg medya/$T-kart.jpg
           cp cikti/reel.mp4 medya/$T-reel.mp4
           git config user.name "turksopranos-robot"
           git config user.email "robot@users.noreply.github.com"
-          git add medya/ && (git commit -qm "Medya $T" && git push -q || echo "medya zaten var")
-          URL="https://raw.githubusercontent.com/${{ github.repository }}/main/medya/$T-kart.jpg"
-          sleep 5
-          if [ "$(curl -s -o /dev/null -w '%{http_code}' "$URL")" = "200" ]; then echo "kart=$URL" >> $GITHUB_OUTPUT; else echo "kart=" >> $GITHUB_OUTPUT; fi
-          echo "video=https://raw.githubusercontent.com/${{ github.repository }}/main/medya/$T-reel.mp4" >> $GITHUB_OUTPUT
+          git add medya/ && git commit -qm "Medya $T" && git pull -q --rebase && git push -q
+          sleep 10
 
       - name: Instagram'a yayınla
         if: steps.sec.outputs.var == 'evet'
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
-        run: python3 robot/yayinla.py gun.json cikti "${{ steps.medya.outputs.kart }}" "${{ steps.medya.outputs.video }}"
+          PARCA: ${{ steps.parca.outputs.p }}
+        run: |
+          T=${{ steps.sec.outputs.tarih }}
+          B="https://raw.githubusercontent.com/${{ github.repository }}/main/medya"
+          mkdir -p cikti
+          python3 robot/yayinla.py gun.json cikti "$B/$T-kart.jpg" "$B/$T-reel.mp4"
 
       - name: Sonucu kaydet
         if: always() && steps.sec.outputs.var == 'evet'
         run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git pull -q --rebase
           python3 - <<'EOF'
           import json, os
           yol = "durum/yayinlanan.json"
+          os.makedirs("durum", exist_ok=True)
           yapilan = json.load(open(yol)) if os.path.exists(yol) else []
           s = json.load(open("cikti/sonuc.json")) if os.path.exists("cikti/sonuc.json") else {"hata": "yayın adımı çalışmadı"}
-          yapilan.append(s)
+          eski = next((k for k in yapilan if k.get("tarih") == s.get("tarih")), None)
+          if eski:
+              for a in [a for a in list(eski) if a.endswith("_hata")]:
+                  del eski[a]
+              eski.update(s)
+          else:
+              yapilan.append(s)
           json.dump(yapilan, open(yol, "w"), ensure_ascii=False, indent=1)
           print(json.dumps(s, ensure_ascii=False))
           EOF
-          git pull -q --rebase
           git add durum/ && git commit -qm "Yayin sonucu ${{ steps.sec.outputs.tarih }}" && git push -q

@@ -19,6 +19,8 @@ if os.path.exists("durum/yayinlanan.json"):
             for a in ("reel_id", "hikaye_id", "gonderi_id"):
                 if k.get(a): onceki[a] = k[a]
 sonuc.update(onceki)
+PARCA = os.environ.get("PARCA", "hepsi")  # gonderi | reel | hikaye | hepsi
+yap = lambda ad: PARCA in ("hepsi", ad)
 
 def istek(method, url, params=None, data=None, headers=None):
     params = dict(params or {}); params["access_token"] = TOKEN
@@ -60,7 +62,7 @@ def video_yukle(media_type, caption=None):
     return istek("POST", f"{API}/{IG}/media_publish", {"creation_id": kap["id"]})["id"]
 
 # 1) Reel
-if "reel_id" not in sonuc:
+if yap("reel") and "reel_id" not in sonuc:
   try:
     sonuc["reel_id"] = video_yukle("REELS", gun["reel_aciklama"])
     print("Reel yayınlandı")
@@ -68,7 +70,7 @@ if "reel_id" not in sonuc:
     sonuc["reel_hata"] = str(e)[:500]; print("Reel HATA:", sonuc["reel_hata"])
 
 # 2) Hikâye (aynı video)
-if "hikaye_id" not in sonuc:
+if yap("hikaye") and "hikaye_id" not in sonuc:
   try:
     sonuc["hikaye_id"] = video_yukle("STORIES")
     print("Hikâye yayınlandı")
@@ -76,7 +78,7 @@ if "hikaye_id" not in sonuc:
     sonuc["hikaye_hata"] = str(e)[:500]; print("Hikâye HATA:", sonuc["hikaye_hata"])
 
 # 3) Alıntı kartı gönderisi
-if "gonderi_id" in sonuc:
+if "gonderi_id" in sonuc or not yap("gonderi"):
     pass
 elif KART_URL:
     try:
