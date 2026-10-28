@@ -1,0 +1,120 @@
+[
+  {
+    "tarih": "2026-10-28",
+    "no": 1,
+    "reel": [
+      ["Kimse seni\nkurtarmaya\ngelmiyor.", "kurtarmaya", 2.8],
+      ["Sokak bunu\nsana erken\nöğretir.", "Sokak", 2.6],
+      ["Ya düşersin...", "düşersin...", 2.0],
+      ["...ya kalkmayı\nöğrenirsin.", "kalkmayı", 2.6],
+      ["Herkes zirveyi\nkonuşur.", "zirveyi", 2.4],
+      ["Kimse oraya giden\nkaranlık yolu\nkonuşmaz.", "karanlık", 3.2],
+      ["Sessiz çalış.", "Sessiz", 2.2],
+      ["Bırak sonuçların\ngürültüsü\nkonuşsun.", "gürültüsü", 3.2],
+      ["Bugün ne\ninşa ettin?", "inşa", 3.0]
+    ],
+    "reel_aciklama": "Otuz yıl o sokaklarda kaldım evlat. Bir tek bunu öğrendim: kimse gelmiyor. 🎩\n\nSokak Dersi #1\nSen bugün ne inşa ettin? Yaz aşağıya.\n\n#sokakdersi #motivasyon #disiplin #sessizgüç #türksopranos",
+    "kart": "Sokak öğretir.\nDers bir kere verilir.",
+    "kart_vurgu": "bir",
+    "kart_aciklama": "Ben dersimi pahalı ödedim. Sen ucuza al. 🎩\n\nKaydet, unutma.\n\n#sokakdersi #sözler #hayatdersleri #türksopranos"
+  },
+  {
+    "tarih": "2026-10-29",
+    "no": 2,
+    "reel": [
+      ["Sadakat\nucuz değildir.", "Sadakat", 2.6],
+      ["O yüzden\nherkesten\nbekleme.", "bekleme.", 2.6],
+      ["Kalabalık\nsana güldüğünde\nsayma.", "güldüğünde", 2.8],
+      ["Sen düştüğünde\nyanında kalanı\nsay.", "kalanı", 3.0],
+      ["Ben otuz yılda\nüç kişi saydım.", "üç", 2.8],
+      ["Yetti de arttı.", "Yetti", 2.4],
+      ["Senin kaç\nkişin var?", "kaç", 3.0]
+    ],
+    "reel_aciklama": "Yanımda kalanları parmakla sayarım, bir elim yeter. 🎩\n\nSokak Dersi #2\nSenin kaç kişin var? Yorumda söyle.\n\n#sokakdersi #sadakat #dostluk #motivasyon #türksopranos",
+    "kart": "Söz senedin olsun.\nİmza sonra gelir.",
+    "kart_vurgu": "Söz",
+    "kart_aciklama": "Eskiden el sıkışmak yeterdi. Şimdi senet bile yetmiyor. 🎩\n\n#sokakdersi #söz #hayatdersleri #türksopranos"
+  },
+  {
+    "tarih": "2026-10-30",
+    "no": 3,
+    "reel": [
+      ["Masada en çok\nkonuşan...", "konuşan...", 2.6],
+      ["...genelde\nen az bilendir.", "az", 2.6],
+      ["Dinle.", "Dinle.", 1.8],
+      ["Bekle.", "Bekle.", 1.8],
+      ["Herkes kartını\naçsın.", "kartını", 2.6],
+      ["Son sözü\nsen söyle.", "Son", 2.8],
+      ["Masayı o zaman\nsen kalkarsın.", "sen", 3.0]
+    ],
+    "reel_aciklama": "Çok masaya oturdum. Kazananı hep en sessiz olandan çıktı. 🎩\n\nSokak Dersi #3\nKaydet, bir dahaki pazarlıkta lazım olur.\n\n#sokakdersi #pazarlık #strateji #motivasyon #türksopranos",
+    "kart": "Az konuş,\nçok gör.",
+    "kart_vurgu": "gör.",
+    "kart_aciklama": "Gözün gördüğünü dil söylerse, iş biter. 🎩\n\n#sokakdersi #sözler #strateji #türksopranos"
+  },
+  {
+    "tarih": "2026-10-31",
+    "no": 4,
+    "reel": [
+      ["Öfke sana\nait değilse...", "Öfke", 2.6],
+      ["...taşıma.", "taşıma.", 2.0],
+      ["Seni kızdırabilen\nadam...", "kızdırabilen", 2.8],
+      ["...seni yönetiyor\ndemektir.", "yönetiyor", 2.8],
+      ["Ben gençken\nçok yönetildim.", "yönetildim.", 2.8],
+      ["Bedelini de\nben ödedim.", "Bedelini", 2.8],
+      ["Sen ödeme.", "ödeme.", 2.6]
+    ],
+    "reel_aciklama": "Gençken bir lafa kızıp yıllarımı verdim. Değmezdi. 🎩\n\nSokak Dersi #4\nSeni en çok ne kızdırıyor? Yaz.\n\n#sokakdersi #öfke #sabır #disiplin #türksopranos",
+    "kart": "Kral olmak isteyen\nönce kendine hükmetsin.",
+    "kart_vurgu": "kendine",
+    "kart_aciklama": "Kendine söz geçiremeyen, sokağa hiç geçiremez. 🎩\n\n#sokakdersi #disiplin #liderlik #türksopranos"
+  },
+  {
+    "tarih": "2026-11-01",
+    "no": 5,
+    "reel": [
+      ["İhanet\ndüşmandan\ngelmez.", "İhanet", 2.8],
+      ["Düşman\nzaten belli.", "belli.", 2.4],
+      ["Bıçak hep...", "Bıçak", 2.0],
+      ["...sırtını döndüğün\nyerden gelir.", "sırtını", 3.0],
+      ["O yüzden\nsırtını\nkimseye dönme.", "kimseye", 3.0],
+      ["Ya da sadece\nüç kişiye dön.", "üç", 3.0]
+    ],
+    "reel_aciklama": "Beni düşmanım hiç yıkmadı. Soframa oturan yıktı. 🎩\n\nSokak Dersi #5\nSen de yaşadıysan bir 🎩 bırak.\n\n#sokakdersi #ihanet #güven #motivasyon #türksopranos",
+    "kart": "Herkese güler yüz,\nkimseye sırrını açma.",
+    "kart_vurgu": "sırrını",
+    "kart_aciklama": "Sır iki kişiyi geçti mi, sokağın malıdır. 🎩\n\n#sokakdersi #sözler #güven #türksopranos"
+  },
+  {
+    "tarih": "2026-11-02",
+    "no": 6,
+    "reel": [
+      ["Sabır\nzayıflık değil.", "Sabır", 2.6],
+      ["Silahsız\nsavaştır.", "Silahsız", 2.6],
+      ["Acele eden\nilk hamleyi\nyapar.", "ilk", 2.8],
+      ["Sabreden...", "Sabreden...", 2.0],
+      ["...son hamleyi.", "son", 2.6],
+      ["Oyunu\nson hamle\nkazanır.", "kazanır.", 3.0]
+    ],
+    "reel_aciklama": "Aceleyle kazandığım her şeyi kaybettim. Bekleyerek aldığımı kimse alamadı. 🎩\n\nSokak Dersi #6\nKaydet, acele ettiğin gün aç.\n\n#sokakdersi #sabır #strateji #motivasyon #türksopranos",
+    "kart": "Bekleyen kazanır.\nAma boş bekleyen değil.",
+    "kart_vurgu": "boş",
+    "kart_aciklama": "Beklerken bileğini bile. 🎩\n\n#sokakdersi #sabır #çalışmak #türksopranos"
+  },
+  {
+    "tarih": "2026-11-03",
+    "no": 7,
+    "reel": [
+      ["Aile\nkan bağı\ndeğildir.", "kan", 2.8],
+      ["Zor gecede\nkapını çalandır.", "kapını", 2.8],
+      ["Ben hastanede\nyatarken...", "hastanede", 2.6],
+      ["...kapıda bekleyenleri\nhiç unutmadım.", "unutmadım.", 3.0],
+      ["Kimin sofrasında\noturduğuna\ndikkat et.", "sofrasında", 3.2],
+      ["Bir gün o sofra\nsenin aileni seçer.", "aileni", 3.0]
+    ],
+    "reel_aciklama": "Kan bağı olanlar gelmedi. Kapımı çalanlar ailem oldu. 🎩\n\nSokak Dersi #7\nSenin ailen kim? Etiketle.\n\n#sokakdersi #aile #sadakat #motivasyon #türksopranos",
+    "kart": "Saygı istenmez,\nkazanılır.",
+    "kart_vurgu": "kazanılır.",
+    "kart_aciklama": "Bağırarak alınan saygı, sesin kısılınca biter. 🎩\n\n#sokakdersi #saygı #hayatdersleri #türksopranos"
+  }
+]
