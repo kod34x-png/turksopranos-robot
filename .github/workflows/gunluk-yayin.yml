@@ -37,7 +37,7 @@ jobs:
           os.makedirs("durum", exist_ok=True)
           yol = "durum/yayinlanan.json"
           yapilan = json.load(open(yol)) if os.path.exists(yol) else []
-          bitti = {y["tarih"] for y in yapilan if y.get("reel_id")}
+          bitti = {y["tarih"] for y in yapilan if y.get("reel_id") and y.get("hikaye_id") and y.get("gonderi_id")}
           gun = next((g for g in takvim if g["tarih"] == bugun), None)
           if gun is None or bugun in bitti:
               print("Bugün için yayınlanacak içerik yok.")
@@ -61,16 +61,17 @@ jobs:
           cp cikti/reel.mp4 medya/$T-reel.mp4
           git config user.name "turksopranos-robot"
           git config user.email "robot@users.noreply.github.com"
-          git add medya/ && git commit -qm "Medya $T" && git push -q
+          git add medya/ && (git commit -qm "Medya $T" && git push -q || echo "medya zaten var")
           URL="https://raw.githubusercontent.com/${{ github.repository }}/main/medya/$T-kart.jpg"
           sleep 5
           if [ "$(curl -s -o /dev/null -w '%{http_code}' "$URL")" = "200" ]; then echo "kart=$URL" >> $GITHUB_OUTPUT; else echo "kart=" >> $GITHUB_OUTPUT; fi
+          echo "video=https://raw.githubusercontent.com/${{ github.repository }}/main/medya/$T-reel.mp4" >> $GITHUB_OUTPUT
 
       - name: Instagram'a yayınla
         if: steps.sec.outputs.var == 'evet'
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
-        run: python3 robot/yayinla.py gun.json cikti "${{ steps.medya.outputs.kart }}"
+        run: python3 robot/yayinla.py gun.json cikti "${{ steps.medya.outputs.kart }}" "${{ steps.medya.outputs.video }}"
 
       - name: Sonucu kaydet
         if: always() && steps.sec.outputs.var == 'evet'

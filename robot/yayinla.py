@@ -9,7 +9,16 @@ TOKEN = os.environ["IG_TOKEN"]
 gun = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = sys.argv[2]
 KART_URL = sys.argv[3] if len(sys.argv) > 3 else ""
+VIDEO_URL = sys.argv[4] if len(sys.argv) > 4 else ""
 sonuc = {"tarih": gun["tarih"], "no": gun["no"]}
+# Bugün daha önce yapılanları atla (tekrar paylaşım olmasın)
+onceki = {}
+if os.path.exists("durum/yayinlanan.json"):
+    for k in json.load(open("durum/yayinlanan.json", encoding="utf-8")):
+        if k.get("tarih") == gun["tarih"]:
+            for a in ("reel_id", "hikaye_id", "gonderi_id"):
+                if k.get(a): onceki[a] = k[a]
+sonuc.update(onceki)
 
 def istek(method, url, params=None, data=None, headers=None):
     params = dict(params or {}); params["access_token"] = TOKEN
@@ -41,37 +50,35 @@ def bekle(cid, ad):
     raise RuntimeError(f"{ad} zaman aşımı")
 
 def video_yukle(media_type, caption=None):
-    params = {"media_type": media_type, "upload_type": "resumable"}
+    params = {"media_type": media_type, "video_url": VIDEO_URL}
     if caption:
         params["caption"] = caption
     if media_type == "REELS":
         params["share_to_feed"] = "true"
     kap = istek("POST", f"{API}/{IG}/media", params)
-    yol = os.path.join(OUT, "reel.mp4")
-    boyut = os.path.getsize(yol)
-    req = urllib.request.Request(kap["uri"], data=open(yol, "rb").read(), method="POST", headers={
-        "Authorization": f"OAuth {TOKEN}", "offset": "0", "file_size": str(boyut)})
-    with urllib.request.urlopen(req, timeout=600) as r:
-        r.read()
     bekle(kap["id"], media_type)
     return istek("POST", f"{API}/{IG}/media_publish", {"creation_id": kap["id"]})["id"]
 
 # 1) Reel
-try:
+if "reel_id" not in sonuc:
+  try:
     sonuc["reel_id"] = video_yukle("REELS", gun["reel_aciklama"])
     print("Reel yayınlandı")
-except Exception as e:
+  except Exception as e:
     sonuc["reel_hata"] = str(e)[:500]; print("Reel HATA:", sonuc["reel_hata"])
 
 # 2) Hikâye (aynı video)
-try:
+if "hikaye_id" not in sonuc:
+  try:
     sonuc["hikaye_id"] = video_yukle("STORIES")
     print("Hikâye yayınlandı")
-except Exception as e:
+  except Exception as e:
     sonuc["hikaye_hata"] = str(e)[:500]; print("Hikâye HATA:", sonuc["hikaye_hata"])
 
 # 3) Alıntı kartı gönderisi
-if KART_URL:
+if "gonderi_id" in sonuc:
+    pass
+elif KART_URL:
     try:
         kap = istek("POST", f"{API}/{IG}/media", {"image_url": KART_URL, "caption": gun["kart_aciklama"]})
         bekle(kap["id"], "Gönderi")
