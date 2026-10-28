@@ -1,5 +1,5 @@
 name: Baglanti Testi
-# tetik: 1
+# tetik: 2
 
 on:
   workflow_dispatch:
