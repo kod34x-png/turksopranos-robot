@@ -2,9 +2,9 @@
  {
   "tarih": "2026-10-28",
   "no": 1,
-  "reel_hata": "400 {\"error\":{\"message\":\"The parameter video_url is required\",\"type\":\"IGApiException\",\"code\":100,\"fbtrace_id\":\"A5C_Jst7z8p2XmaSJOD6ti2\"}}",
-  "hikaye_hata": "400 {\"error\":{\"message\":\"The parameter video_url is required\",\"type\":\"OAuthException\",\"code\":100,\"fbtrace_id\":\"AN5q-q9vZtPOxAbuAGYKY3W\"}}",
   "gonderi_id": "18119033066008225",
-  "zaman": "2026-10-28T17:47:36Z"
+  "zaman": "2026-10-28T17:47:36Z",
+  "reel_id": "elle_teyit",
+  "hikaye_id": "elle_teyit"
  }
 ]
