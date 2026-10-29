@@ -1,0 +1,33 @@
+name: Gunluk Istatistik
+
+on:
+  schedule:
+    - cron: "30 20 * * *"   # her gece 23:30 (Türkiye)
+  workflow_dispatch:
+  push:
+    paths:
+      - "robot/istatistik_tetik.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: istatistik
+  cancel-in-progress: false
+
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: İstatistikleri çek
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: python3 robot/istatistik.py
+      - name: Depoya yaz
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add durum/ && git commit -qm "Istatistik $(date -u +%F)" || exit 0
+          git pull -q --rebase && git push -q
