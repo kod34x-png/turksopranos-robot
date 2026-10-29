@@ -60,7 +60,10 @@ jobs:
                      "hepsi": ["gonderi_id", "reel_id", "hikaye_id"]}[os.environ["PARCA"]]
           gun = next((g for g in takvim if g["tarih"] == bugun), None)
           out = open(os.environ["GITHUB_OUTPUT"], "a")
-          if gun is None or all(a in kayit for a in gerekli):
+          if os.path.exists("robot/DURAKLAT"):
+              print("Robot duraklatıldı (robot/DURAKLAT var).")
+              out.write("var=hayir\n")
+          elif gun is None or all(a in kayit for a in gerekli):
               print("Yapılacak iş yok.")
               out.write("var=hayir\n")
           else:
