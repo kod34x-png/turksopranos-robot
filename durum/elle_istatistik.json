@@ -1,0 +1,24 @@
+[
+ {
+  "olcum_zamani": "2026-10-29T12:02+03:00",
+  "kaynak": "Özgür'ün ekran görüntüleri",
+  "hesap": {
+   "gonderi": 2,
+   "takipci": 3,
+   "takip_edilen": 4,
+   "son_30_gun_goruntuleme": 1400
+  },
+  "icerik": {
+   "2026-10-28_reel_sokak_dersi_1": {
+    "goruntuleme": 1420
+   },
+   "2026-10-28_kart_sokak_ogretir": {
+    "goruntuleme": 3
+   },
+   "2026-10-28_hikaye": {
+    "goruntuleyen": 3
+   }
+  },
+  "not": "Yayından ~15 saat sonra. Reel takipçi dışına dağıldı; kart ve hikâye sadece takipçilere gitti. Görüntülemeden takipçiye dönüşüm ~%0,2."
+ }
+]
