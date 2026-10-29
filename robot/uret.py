@@ -102,12 +102,18 @@ def muzik(sure, satir_baslari, yol, SR=44100):
 # ------------------------------------------------------------------ reel
 def reel():
     W, H, FPS = 1080, 1920, 30
-    satirlar = gun["reel"]
-    toplam = sum(s[2] for s in satirlar) + 0.8
+    satirlar = [list(s) for s in gun["reel"]]
+    satirlar[-1][2] += 1.2                      # son soru ekranda daha uzun kalsın (yorum için)
     katmanlar, zamanlar, t0 = [], [], 0.3
     for metin, vurgu, sure in satirlar:
         katmanlar.append(yazi_katmani(W, H, metin, vurgu, boyut_sec(metin, W)))
         zamanlar.append((t0, sure)); t0 += sure
+    # kapanış: takip çağrısı
+    cta = Image.alpha_composite(
+        yazi_katmani(W, H, f"Yarın\nSokak Dersi #{gun['no'] + 1}", "Yarın", 104, y_merkez=H * 0.45),
+        yazi_katmani(W, H, "Takip et, kaçırma.", "Takip", 72, y_merkez=H * 0.60))
+    katmanlar.append(cta); zamanlar.append((t0, 2.8)); t0 += 2.8
+    toplam = t0 + 0.5
     bg, noise = arka_plan(W, H)
     hf = ImageFont.truetype(SANS, 38)
     seri = ImageFont.truetype(SANS, 34)
