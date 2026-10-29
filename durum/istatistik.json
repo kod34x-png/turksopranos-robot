@@ -108,5 +108,14 @@
    }
   ],
   "eksikler": []
+ },
+ {
+  "zaman": "2026-10-29T22:26+03:00",
+  "hesap": {},
+  "icerik": [],
+  "eksikler": [
+   "hesap: API access blocked.",
+   "medya listesi: API access blocked."
+  ]
  }
 ]
