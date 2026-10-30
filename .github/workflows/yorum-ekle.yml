@@ -1,0 +1,20 @@
+name: Ilk Yorum Ekle
+on:
+  workflow_dispatch:
+  push:
+    paths: ["icerik/yorum_kuyrugu.json"]
+permissions:
+  contents: write
+jobs:
+  yorum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: python3 robot/yorum_ekle.py | tee yorum.log
+      - run: |
+          git config user.name "turksopranos-robot"; git config user.email "robot@users.noreply.github.com"
+          mkdir -p durum; cat yorum.log >> durum/yorum_kaydi.log
+          git add -A icerik/yorum_kuyrugu.json durum/ && git commit -qm "Yorum kuyrugu islendi" && git pull -q --rebase && git push -q || true
