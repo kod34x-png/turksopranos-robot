@@ -1,12 +1,12 @@
 name: Gunluk Yayin
 
-# Türkiye saatiyle: 13:00 gönderi, 20:30 Reel, 22:30 hikâye
-# (GitHub zamanlayıcısı birkaç dakika gecikebildiği için biraz erken kuruldu)
+# Türkiye saatiyle: 13:00 gönderi, 20:30 Reel, 22:30 hikâye.
+# GitHub zamanlayıcısı saatlerce gecikebildiği/atlayabildiği için robot
+# 12:00-23:30 arası her 30 dakikada uyanır; vakti gelmiş ve henüz atılmamış
+# ne varsa onu atar (çift paylaşım yapmaz).
 on:
   schedule:
-    - cron: "45 9 * * *"    # 12:45 -> gönderi
-    - cron: "15 17 * * *"   # 20:15 -> reel
-    - cron: "15 19 * * *"   # 22:15 -> hikâye
+    - cron: "0,30 9-20 * * *"
   workflow_dispatch:
     inputs:
       parca:
@@ -33,12 +33,7 @@ jobs:
       - name: Hangi parça?
         id: parca
         run: |
-          case "${{ github.event.schedule }}" in
-            "45 9 * * *")  P=gonderi ;;
-            "15 17 * * *") P=reel ;;
-            "15 19 * * *") P=hikaye ;;
-            *) P="${{ github.event.inputs.parca || 'hepsi' }}" ;;
-          esac
+          if [ "${{ github.event_name }}" = "schedule" ]; then P=vakit; else P="${{ github.event.inputs.parca || 'hepsi' }}"; fi
           echo "p=$P" >> $GITHUB_OUTPUT; echo "Parça: $P"
 
       - name: Bugünün içeriğini seç
@@ -56,14 +51,17 @@ jobs:
           for k in yapilan:
               if k.get("tarih") == bugun:
                   kayit.update({a: v for a, v in k.items() if a.endswith("_id")})
+          simdi = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
+          vakitli = [a for a, s in (("gonderi_id", "13:00"), ("reel_id", "20:30"), ("hikaye_id", "22:30")) if simdi >= s]
           gerekli = {"gonderi": ["gonderi_id"], "reel": ["reel_id"], "hikaye": ["hikaye_id"],
-                     "hepsi": ["gonderi_id", "reel_id", "hikaye_id"]}[os.environ["PARCA"]]
+                     "hepsi": ["gonderi_id", "reel_id", "hikaye_id"], "vakit": vakitli}[os.environ["PARCA"]]
+          print("Saat", simdi, "gerekli:", gerekli)
           gun = next((g for g in takvim if g["tarih"] == bugun), None)
           out = open(os.environ["GITHUB_OUTPUT"], "a")
           if os.path.exists("robot/DURAKLAT"):
               print("Robot duraklatıldı (robot/DURAKLAT var).")
               out.write("var=hayir\n")
-          elif gun is None or all(a in kayit for a in gerekli):
+          elif gun is None or not gerekli or all(a in kayit for a in gerekli):
               print("Yapılacak iş yok.")
               out.write("var=hayir\n")
           else:

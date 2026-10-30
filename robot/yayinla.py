@@ -20,7 +20,10 @@ if os.path.exists("durum/yayinlanan.json"):
                 if k.get(a): onceki[a] = k[a]
 sonuc.update(onceki)
 PARCA = os.environ.get("PARCA", "hepsi")  # gonderi | reel | hikaye | hepsi
-yap = lambda ad: PARCA in ("hepsi", ad)
+import datetime
+_saat = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
+_vakit = {"gonderi": "13:00", "reel": "20:30", "hikaye": "22:30"}
+yap = lambda ad: PARCA in ("hepsi", ad) or (PARCA == "vakit" and _saat >= _vakit[ad])
 
 def istek(method, url, params=None, data=None, headers=None):
     params = dict(params or {}); params["access_token"] = TOKEN
