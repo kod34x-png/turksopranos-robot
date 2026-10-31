@@ -344,5 +344,87 @@
    }
   ],
   "eksikler": []
+ },
+ {
+  "zaman": "2026-11-01T02:32+03:00",
+  "hesap": {
+   "followers_count": 3,
+   "follows_count": 4,
+   "media_count": 4,
+   "son_gun": {
+    "reach": 255,
+    "views": 286,
+    "profile_views": 2,
+    "accounts_engaged": 3,
+    "total_interactions": 3
+   }
+  },
+  "icerik": [
+   {
+    "id": "18644352079001637",
+    "tur": "REELS",
+    "zaman": "2026-10-31T17:35:41+0000",
+    "link": "https://www.instagram.com/reel/DfKtMORFV4o/",
+    "ilk_satir": "Gençken bir lafa kızıp yıllarımı verdim. Değmezdi. 🎩",
+    "begeni": 0,
+    "yorum": 0,
+    "views": 119,
+    "reach": 111,
+    "saved": 0,
+    "shares": 0,
+    "total_interactions": 0,
+    "ig_reels_avg_watch_time": 3526,
+    "ig_reels_video_view_total_time": 391429
+   },
+   {
+    "id": "17978784597133042",
+    "tur": "REELS",
+    "zaman": "2026-10-30T18:25:29+0000",
+    "link": "https://www.instagram.com/reel/DfIOGjECe8T/",
+    "ilk_satir": "Çok masaya oturdum. Kazananı hep en sessiz olandan çıktı. 🎩",
+    "begeni": 0,
+    "yorum": 0,
+    "views": 114,
+    "reach": 108,
+    "saved": 1,
+    "shares": 0,
+    "total_interactions": 1,
+    "ig_reels_avg_watch_time": 3881,
+    "ig_reels_video_view_total_time": 426930
+   },
+   {
+    "id": "18003824471808394",
+    "tur": "REELS",
+    "zaman": "2026-10-29T19:36:37+0000",
+    "link": "https://www.instagram.com/reel/DfFxdt9t0L4/",
+    "ilk_satir": "",
+    "begeni": 0,
+    "yorum": 1,
+    "views": 189,
+    "reach": 182,
+    "saved": 1,
+    "shares": 0,
+    "total_interactions": 2,
+    "ig_reels_avg_watch_time": 4370,
+    "ig_reels_video_view_total_time": 791004
+   },
+   {
+    "id": "18013082354989067",
+    "tur": "REELS",
+    "zaman": "2026-10-28T17:51:02+0000",
+    "link": "https://www.instagram.com/reel/DfDAkK4EgI8/",
+    "ilk_satir": "Otuz yıl o sokaklarda kaldım evlat. Bir tek bunu öğrendim: kimse gelmiyor. 🎩",
+    "begeni": 20,
+    "yorum": 0,
+    "views": 1618,
+    "reach": 1380,
+    "saved": 9,
+    "shares": 12,
+    "total_interactions": 41,
+    "ig_reels_avg_watch_time": 5740,
+    "ig_reels_video_view_total_time": 8174082
+   }
+  ],
+  "eksikler": []
  }
 ]
