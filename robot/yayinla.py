@@ -80,8 +80,9 @@ if yap("hikaye") and "hikaye_id" not in sonuc:
   except Exception as e:
     sonuc["hikaye_hata"] = str(e)[:500]; print("Hikâye HATA:", sonuc["hikaye_hata"])
 
-# 3) Alıntı kartı gönderisi
-if "gonderi_id" in sonuc or not yap("gonderi"):
+# 3) Alıntı kartı gönderisi — 31 Ekim 2026'dan itibaren KAPALI (Özgür'ün kararı)
+KART_ACIK = False
+if not KART_ACIK or "gonderi_id" in sonuc or not yap("gonderi"):
     pass
 elif KART_URL:
     try:

@@ -1,12 +1,12 @@
 name: Gunluk Yayin
 
-# Türkiye saatiyle: 13:00 gönderi, 20:30 Reel, 22:30 hikâye.
+# Türkiye saatiyle: 20:30 Reel, 22:30 hikâye (kart gönderisi 31 Ekim 2026'dan beri kapalı).
 # GitHub zamanlayıcısı saatlerce gecikebildiği/atlayabildiği için robot
 # 12:00-23:30 arası her 30 dakikada uyanır; vakti gelmiş ve henüz atılmamış
 # ne varsa onu atar (çift paylaşım yapmaz).
 on:
   schedule:
-    - cron: "0,30 9-20 * * *"
+    - cron: "0,30 17-20 * * *"
   workflow_dispatch:
     inputs:
       parca:
@@ -52,9 +52,9 @@ jobs:
               if k.get("tarih") == bugun:
                   kayit.update({a: v for a, v in k.items() if a.endswith("_id")})
           simdi = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
-          vakitli = [a for a, s in (("gonderi_id", "13:00"), ("reel_id", "20:30"), ("hikaye_id", "22:30")) if simdi >= s]
+          vakitli = [a for a, s in (("reel_id", "20:30"), ("hikaye_id", "22:30")) if simdi >= s]
           gerekli = {"gonderi": ["gonderi_id"], "reel": ["reel_id"], "hikaye": ["hikaye_id"],
-                     "hepsi": ["gonderi_id", "reel_id", "hikaye_id"], "vakit": vakitli}[os.environ["PARCA"]]
+                     "hepsi": ["reel_id", "hikaye_id"], "vakit": vakitli}[os.environ["PARCA"]]
           print("Saat", simdi, "gerekli:", gerekli)
           gun = next((g for g in takvim if g["tarih"] == bugun), None)
           out = open(os.environ["GITHUB_OUTPUT"], "a")
