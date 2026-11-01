@@ -1,5 +1,5 @@
 """Instagram'a Reel + hikâye + alıntı kartı gönderisi yayınlar.
-Kullanım: python robot/yayinla.py <gün_json> <çıktı_klasörü> <kart_public_url|"">
+Kullanım: python robot/yayinla.py <gün_json> <çıktı_klasörü> <kart_url|""> <video_url> [kapak_url]
 Anahtar IG_TOKEN ortam değişkeninden okunur; hiçbir yere yazdırılmaz.
 """
 import json, os, sys, time, urllib.parse, urllib.request
@@ -10,6 +10,7 @@ gun = json.load(open(sys.argv[1], encoding="utf-8"))
 OUT = sys.argv[2]
 KART_URL = sys.argv[3] if len(sys.argv) > 3 else ""
 VIDEO_URL = sys.argv[4] if len(sys.argv) > 4 else ""
+KAPAK_URL = sys.argv[5] if len(sys.argv) > 5 else ""   # Reel kapağı (1080x1920, yazılı)
 sonuc = {"tarih": gun["tarih"], "no": gun["no"]}
 # Bugün daha önce yapılanları atla (tekrar paylaşım olmasın)
 onceki = {}
@@ -60,8 +61,18 @@ def video_yukle(media_type, caption=None):
         params["caption"] = caption
     if media_type == "REELS":
         params["share_to_feed"] = "true"
-    kap = istek("POST", f"{API}/{IG}/media", params)
-    bekle(kap["id"], media_type)
+        if KAPAK_URL:
+            params["cover_url"] = KAPAK_URL
+    try:
+        kap = istek("POST", f"{API}/{IG}/media", params)
+        bekle(kap["id"], media_type)
+    except RuntimeError as e:
+        if "cover_url" not in params:
+            raise
+        print("Kapak kabul edilmedi, kapaksız deneniyor:", str(e)[:200])   # Reel yine de çıksın
+        params.pop("cover_url")
+        kap = istek("POST", f"{API}/{IG}/media", params)
+        bekle(kap["id"], media_type)
     return istek("POST", f"{API}/{IG}/media_publish", {"creation_id": kap["id"]})["id"]
 
 # 1) Reel

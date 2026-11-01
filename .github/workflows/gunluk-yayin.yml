@@ -74,7 +74,7 @@ jobs:
         id: hazir
         run: |
           T=${{ steps.sec.outputs.tarih }}
-          if [ -f medya/$T-reel.mp4 ] && [ -f medya/$T-kart.jpg ]; then echo "var=evet" >> $GITHUB_OUTPUT; else echo "var=hayir" >> $GITHUB_OUTPUT; fi
+          if [ -f medya/$T-reel.mp4 ] && [ -f medya/$T-kart.jpg ] && [ -f medya/$T-kapak.jpg ]; then echo "var=evet" >> $GITHUB_OUTPUT; else echo "var=hayir" >> $GITHUB_OUTPUT; fi
 
       - name: Araçlar
         if: steps.sec.outputs.var == 'evet' && steps.hazir.outputs.var == 'hayir'
@@ -82,7 +82,7 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
           pip install -q numpy pillow
 
-      - name: Video ve kartı üret, depoya koy
+      - name: Video, kapak ve kartı üret, depoya koy
         if: steps.sec.outputs.var == 'evet' && steps.hazir.outputs.var == 'hayir'
         run: |
           T=${{ steps.sec.outputs.tarih }}
@@ -90,6 +90,7 @@ jobs:
           mkdir -p medya
           cp cikti/kart.jpg medya/$T-kart.jpg
           cp cikti/reel.mp4 medya/$T-reel.mp4
+          cp cikti/kapak.jpg medya/$T-kapak.jpg
           git config user.name "turksopranos-robot"
           git config user.email "robot@users.noreply.github.com"
           git add medya/ && git commit -qm "Medya $T" && git pull -q --rebase && git push -q
@@ -104,7 +105,7 @@ jobs:
           T=${{ steps.sec.outputs.tarih }}
           B="https://raw.githubusercontent.com/${{ github.repository }}/main/medya"
           mkdir -p cikti
-          python3 robot/yayinla.py gun.json cikti "$B/$T-kart.jpg" "$B/$T-reel.mp4"
+          python3 robot/yayinla.py gun.json cikti "$B/$T-kart.jpg" "$B/$T-reel.mp4" "$B/$T-kapak.jpg"
 
       - name: Sonucu kaydet
         if: always() && steps.sec.outputs.var == 'evet'
