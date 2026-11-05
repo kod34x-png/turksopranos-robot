@@ -14,6 +14,11 @@ STIL = ("Photorealistic cinematic film still, 1980s Istanbul, tungsten light, dr
         "muted colors, crime drama, no text, no letters, no candles. ")
 SES_ADI = "tr-TR-AhmetNeural"
 
+def kaydet(m):
+    print(m, flush=True)
+    with open(KOK / "medya/kabadayi/uretim.log", "a", encoding="utf-8") as f:
+        f.write(m + "\n")
+
 def bolumler():
     return json.load(open(KOK / "icerik/kabadayi.json", encoding="utf-8"))
 
@@ -52,7 +57,7 @@ def uret(b, klasor):
                           random_seed=False, steps=9, shift=3, api_name="/generate")
             shutil.copy(tek_yol(r), k); print("kare", i, flush=True)
         except Exception as e:
-            print("kare durdu:", repr(e)[:300], flush=True); return
+            kaydet("kare durdu: " + repr(e)[:300]); return
     v = Client("zerogpu-aoti/wan2-2-fp8da-aoti-faster", token=T)
     for i, s in enumerate(b["sahneler"], 1):
         o = klasor / f"sahne{i}.mp4"
@@ -63,7 +68,7 @@ def uret(b, klasor):
                           duration_seconds=s.get("sure", 4), steps=6, api_name="/generate_video")
             shutil.copy(tek_yol(r), o); print("sahne", i, flush=True)
         except Exception as e:
-            print("video durdu:", repr(e)[:300], flush=True); return
+            kaydet("video durdu: " + repr(e)[:300]); return
 
 def yazi_katmani(metin, boyut, y, yol):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)

@@ -1,8 +1,10 @@
 name: Kabadayi Uretim
-# Persembe 10:00 (Turkiye) uretir, Cuma ayni saatte eksik kaldiysa devam eder.
+# Persembe 10:00 (Turkiye) uretir; eksik kalirsa Cuma 10:00, 15:00, 20:00 ve Cumartesi 07:00 devam eder.
 on:
   schedule:
     - cron: "0 7 * * 4,5"
+    - cron: "0 12,17 * * 5"
+    - cron: "0 4 * * 6"
   workflow_dispatch:
   push:
     branches: [main]
