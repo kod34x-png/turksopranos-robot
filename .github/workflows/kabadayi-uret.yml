@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 7 * * 4,5"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["robot/kabadayi_tetik.txt"]
 permissions:
   contents: write
 concurrency:

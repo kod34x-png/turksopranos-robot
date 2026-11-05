@@ -48,7 +48,7 @@ def uret(b, klasor):
         if k.exists() or (klasor / f"sahne{i}.mp4").exists():
             continue
         try:
-            r = g.predict(prompt=STIL + s["gorsel"], resolution="864x1536 ( 9:16 )", seed=b["no"] * 100 + i,
+            r = g.predict(prompt=b.get("stil", STIL) + s["gorsel"], resolution="864x1536 ( 9:16 )", seed=b["no"] * 100 + i,
                           random_seed=False, steps=9, shift=3, api_name="/generate")
             shutil.copy(tek_yol(r), k); print("kare", i, flush=True)
         except Exception as e:
@@ -130,7 +130,12 @@ def montaj(b, klasor, cikti, kapak, gecici):
     gir += ["-i", yazi_katmani("KABADAYI GİRSEYDİ", 84, 820, str(gecici / "k1.png"))]
     fc += f"[{son}][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k1];"; n += 1
     gir += ["-i", yazi_katmani("Takip et. Kapı yine açılacak.", 52, 960, str(gecici / "k2.png"))]
-    fc += f"[k1][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[v];"; n += 1
+    fc += f"[k1][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k2];"; n += 1
+    if b.get("not"):
+        gir += ["-i", yazi_katmani(b["not"], 36, 1120, str(gecici / "k3.png"))]
+        fc += f"[k2][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[v];"; n += 1
+    else:
+        fc += "[k2]null[v];"
     gir += ["-i", str(ses)]; sv = n; n += 1
     gir += ["-i", str(gecici / "muzik.wav")]; mz = n; n += 1
     ms = int(gecik * 1000)
@@ -156,7 +161,7 @@ def calistir():
         b = next(x for x in tum if x["no"] == int(sys.argv[2]))
     else:
         biten = {k["no"] for k in yayinlanan() if k.get("reel_id")}
-        b = next((x for x in tum if x["durum"] == "onayli" and x["no"] not in biten
+        b = next((x for x in tum if x["durum"] in ("onayli", "uret") and x["no"] not in biten
                   and not (KOK / f"medya/kabadayi/{x['no']}.mp4").exists()), None)
         if not b:
             print("Uretilecek onayli bolum yok."); return
