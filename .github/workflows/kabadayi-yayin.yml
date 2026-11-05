@@ -1,0 +1,28 @@
+name: Kabadayi Yayin
+# Cumartesi 13:00 (Turkiye). Zamanlayici gecikebildigi icin 16:30'a kadar 30 dakikada bir uyanir; ayni gun tek paylasim yapar.
+on:
+  schedule:
+    - cron: "0,30 10-13 * * 6"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kabadayi-yayin
+  cancel-in-progress: false
+jobs:
+  yayin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yayinla
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          ELLE: ${{ github.event_name == 'workflow_dispatch' && 'evet' || 'hayir' }}
+        run: python3 robot/kabadayi_yayinla.py
+      - name: Sonucu kaydet
+        if: always()
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add durum/kabadayi.json 2>/dev/null && git commit -qm "Kabadayi yayin sonucu" && git pull -q --rebase && git push -q || echo "degisiklik yok"

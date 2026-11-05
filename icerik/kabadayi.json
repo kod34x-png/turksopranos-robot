@@ -1,0 +1,184 @@
+[
+ {
+  "no": 1,
+  "durum": "onayli",
+  "ses": "Evlat. Babanın alın terini masaya süren, kazansa da kaybeder. Kalk. Eve git.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #1. Bazı masalardan kazanarak da kalkamazsın. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "yazi": "Babasının dükkânını masaya sürdü.",
+    "sure": 4
+   },
+   {
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "sure": 4
+   },
+   {
+    "sure": 4
+   },
+   {
+    "sure": 4
+   }
+  ]
+ },
+ {
+  "no": 2,
+  "durum": "taslak",
+  "ses": "Ortağını satan, önce kendi adını satar. Kalemi bırak. Git, helalleş.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #2. İmza kâğıda atılır, ad insanın üstünde kalır. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "gorsel": "Close-up of a man's hand holding a fountain pen over a contract on a dark wooden office desk, a second signature being copied from another paper, desk lamp light.",
+    "hareket": "The pen moves slowly over the paper, the hand hesitates, slow push-in",
+    "yazi": "Ortağının imzasını taklit etti.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Wide shot inside a dim 1980s Istanbul office: the door at the back opens, hard white light behind, silhouette of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow standing in the doorway, people in foreground turning their heads.",
+    "hareket": "The door swings open, light floods in, the silhouetted man stands still, the people turn their heads, slow push-in",
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Low angle shot of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow, walking slowly toward camera through a dim office, backlit, dust in the air.",
+    "hareket": "The man walks slowly and heavily toward the camera, overcoat moving, steady tracking shot",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Extreme close-up of a large weathered male hand with a silver ring pressing flat on a contract on a wooden desk, a fountain pen rolling away.",
+    "hareket": "The large hand presses down firmly, the pen rolls slowly away, shallow focus",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Inside view: a nervous man in a suit leaves through the office door toward a sunlit Istanbul street, a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow stands beside the door, seen from behind.",
+    "hareket": "The man walks out slowly into the daylight, the older man stays still, slow pull-back",
+    "yazi": "",
+    "sure": 4
+   }
+  ]
+ },
+ {
+  "no": 3,
+  "durum": "taslak",
+  "ses": "Yaşlı adamın önünde bağıran, kendi küçüklüğünü duyurur. Çık dışarı. Borcunu konuşuruz.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #3. Güç bağırmakla ölçülmez. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "gorsel": "Medium shot inside a small old Istanbul grocery shop, an elderly shopkeeper behind the counter looking down, a young man in a leather jacket leaning over the counter shouting, tungsten light.",
+    "hareket": "The young man leans forward angrily, the old man lowers his eyes, slow push-in",
+    "yazi": "Yaşlı esnafa borç için bağırdı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Wide shot inside a small old Istanbul grocery shop: the door at the back opens, hard white light behind, silhouette of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow standing in the doorway, people in foreground turning their heads.",
+    "hareket": "The door swings open, light floods in, the silhouetted man stands still, the people turn their heads, slow push-in",
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Low angle shot of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow, walking slowly toward camera between shop shelves, backlit from the street.",
+    "hareket": "The man walks slowly and heavily toward the camera, overcoat moving, steady tracking shot",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Close-up of a large weathered male hand with a silver ring resting calmly on a worn wooden shop counter next to an old brass scale.",
+    "hareket": "The large hand settles slowly on the counter, the scale trembles slightly, shallow focus",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Inside view: a young man in a leather jacket walks out of the shop door onto a rainy Istanbul street, head down, a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow stands beside the counter next to the elderly shopkeeper.",
+    "hareket": "The young man walks out slowly into the street, the older men stay still, slow pull-back",
+    "yazi": "",
+    "sure": 4
+   }
+  ]
+ },
+ {
+  "no": 4,
+  "durum": "taslak",
+  "ses": "Anasını unutan el, kimseye güç vermez. Al o parayı. Eczaneye git.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #4. Gücün ilk borcu anaya. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "gorsel": "Close-up on a dark tea house table: a young man's hand slides folded banknotes and a pharmacy prescription into a jacket pocket, tea glasses around, warm dim light.",
+    "hareket": "The hand slowly pushes the money into the pocket, the paper crumples, slow push-in",
+    "yazi": "Annesinin ilaç parasını cebine koydu.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Wide shot inside a dim 1980s Istanbul tea house: the door at the back opens, hard white light behind, silhouette of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow standing in the doorway, people in foreground turning their heads.",
+    "hareket": "The door swings open, light floods in, the silhouetted man stands still, the people turn their heads, slow push-in",
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Low angle shot of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow, walking slowly toward camera between tea house tables, backlit, steam in the air.",
+    "hareket": "The man walks slowly and heavily toward the camera, overcoat moving, steady tracking shot",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Close-up of a large weathered male hand with a silver ring placing a crumpled pharmacy prescription flat on a dark table next to a tea glass.",
+    "hareket": "The large hand slowly smooths out the paper on the table, steam rises, shallow focus",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Inside view: a young man walks out of the tea house door toward a lit pharmacy across a rainy Istanbul street, a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow stands beside the door, seen from behind.",
+    "hareket": "The young man hurries out across the street, the older man stays still, slow pull-back",
+    "yazi": "",
+    "sure": 4
+   }
+  ]
+ },
+ {
+  "no": 5,
+  "durum": "taslak",
+  "ses": "Tapu çürür, kardeş kalır. Bırak o dosyayı. Git, kapısını çal.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #5. Mirası kazanıp kardeşi kaybetmek de bir yenilgi. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "gorsel": "Medium shot in an old Istanbul courthouse corridor, two middle-aged brothers on opposite benches holding thick legal folders, not looking at each other, cold window light.",
+    "hareket": "The two men sit still, one tightens his grip on the folder, slow push-in",
+    "yazi": "Kardeşiyle mahkemede karşılaştı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Wide shot inside an old Istanbul courthouse corridor: the door at the back opens, hard white light behind, silhouette of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow standing in the doorway, people in foreground turning their heads.",
+    "hareket": "The door swings open, light floods in, the silhouetted man stands still, the people turn their heads, slow push-in",
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "gorsel": "Low angle shot of a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow, walking slowly toward camera along a courthouse corridor, backlit by tall windows.",
+    "hareket": "The man walks slowly and heavily toward the camera, overcoat moving, steady tracking shot",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Close-up of a large weathered male hand with a silver ring resting on a thick legal folder held on a man's knees.",
+    "hareket": "The large hand presses down slowly on the folder, the man's fingers loosen, shallow focus",
+    "yazi": "",
+    "sure": 4
+   },
+   {
+    "gorsel": "Wide view: a middle-aged man leaves a legal folder on a courthouse bench and walks toward the other brother at the end of the corridor, a broad-shouldered Turkish man in his sixties, thick black moustache, no beard, long black wool overcoat, black flat cap, his face half hidden in deep shadow watches from behind.",
+    "hareket": "The man walks slowly down the corridor toward his brother, the older man stays still, slow pull-back",
+    "yazi": "",
+    "sure": 4
+   }
+  ]
+ }
+]
