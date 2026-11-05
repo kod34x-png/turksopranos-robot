@@ -48,6 +48,20 @@ def dene(ad, f, kac=2):
             if "quota" in str(e).lower(): return None
             time.sleep(20)
 
+try:
+    t = Client("ResembleAI/Chatterbox-Multilingual-TTS", token=T)
+    api = t.view_api(return_format="dict")["named_endpoints"]
+    p(json.dumps({k: [x.get("parameter_name") for x in val["parameters"]] for k, val in api.items()}, ensure_ascii=False))
+    ad = next(k for k in api if "generate" in k or "tts" in k)
+    for tohum in (11, 22):
+        o = C / f"ses{tohum}.wav"
+        if o.exists(): continue
+        r = dene("ses", lambda: t.predict(text_input=SES, language_id="tr", audio_prompt_path_input=None, exaggeration_input=0.6,
+            temperature_input=0.7, seed_num_input=tohum, cfgw_input=0.4, api_name=ad))
+        if r: shutil.copy(yol(r), o); p("ses tamam", tohum)
+except Exception:
+    p(traceback.format_exc()[-800:])
+
 g = Client("mcp-tools/Z-Image-Turbo", token=T)
 for i, (prm, _, _) in enumerate(SAHNELER, 1):
     k = C / f"kare{i}.png"
@@ -64,16 +78,3 @@ for i, (_, har, sn) in enumerate(SAHNELER, 1):
         api_name="/generate_video"))
     if r: shutil.copy(yol(r), o); p("sahne", i, "tamam")
 
-try:
-    t = Client("ResembleAI/Chatterbox-Multilingual-TTS", token=T)
-    api = t.view_api(return_format="dict")["named_endpoints"]
-    p(json.dumps({k: [x.get("parameter_name") for x in val["parameters"]] for k, val in api.items()}, ensure_ascii=False))
-    ad = next(k for k in api if "generate" in k or "tts" in k)
-    for tohum in (11, 22):
-        o = C / f"ses{tohum}.wav"
-        if o.exists(): continue
-        r = dene("ses", lambda: t.predict(text_input=SES, language_id="tr", audio_prompt_path_input=None, exaggeration_input=0.6,
-            temperature_input=0.7, seed_num_input=tohum, cfgw_input=0.4, api_name=ad))
-        if r: shutil.copy(yol(r), o); p("ses tamam", tohum)
-except Exception:
-    p(traceback.format_exc()[-800:])
