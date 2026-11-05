@@ -16,6 +16,8 @@ jobs:
           python-version: "3.11"
       - run: pip install gradio_client faster-whisper
       - run: python deneme/sahne_test.py
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
       - name: Sesi yaziya dok
         if: always()
         continue-on-error: true
