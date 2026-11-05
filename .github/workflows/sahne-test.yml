@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install gradio_client faster-whisper
+      - run: pip install gradio_client faster-whisper edge-tts
       - run: python deneme/sahne_test.py
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -26,7 +26,7 @@ jobs:
           import glob
           from faster_whisper import WhisperModel
           m = WhisperModel("small", compute_type="int8")
-          for w in sorted(glob.glob("deneme/cikti/ses*.wav")):
+          for w in sorted(glob.glob("deneme/cikti/ses*")):
               print(w, " ".join(s.text for s in m.transcribe(w, language="tr")[0]))
           PY
       - name: Sonucu dala yaz
