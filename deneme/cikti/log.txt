@@ -23,3 +23,7 @@ sahne 2 tamam
 sahne 3 tamam
 sahne 4 tamam
 sahne 5 tamam
+dil: ('/tmp/gradio/dea400d9034d332647769551c173d563f44883239e7c22e6e18b59caef538f1b/tr_m.flac', 'Geçen ay YouTube kanalımızda iki milyar görüntüleme ile yeni bir dönüm noktasına ulaştık.')
+HATA ses 0 AppError('You have exceeded your ZeroGPU runs limit. Subscribe to Hugging Face PRO to get 40 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU')
+HATA ses 0 AppError('You have exceeded your ZeroGPU runs limit. Subscribe to Hugging Face PRO to get 40 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU')
+edge tamam ahmet
