@@ -10,3 +10,16 @@ HATA ses 0 FileNotFoundError(2, 'No such file or directory')
 HATA ses 1 FileNotFoundError(2, 'No such file or directory')
 HATA ses 0 FileNotFoundError(2, 'No such file or directory')
 HATA ses 1 FileNotFoundError(2, 'No such file or directory')
+{"/on_language_change": ["lang", "current_ref", "current_text"], "/generate_tts_audio": ["text_input", "language_id", "audio_prompt_path_input", "exaggeration_input", "temperature_input", "seed_num_input", "cfgw_input"]}
+HATA ses 0 AppError('FileNotFoundError')
+HATA ses 1 AppError('FileNotFoundError')
+HATA ses 0 AppError('FileNotFoundError')
+HATA ses 1 AppError('FileNotFoundError')
+kare 3 tamam
+kare 4 tamam
+kare 5 tamam
+sahne 1 tamam
+sahne 2 tamam
+sahne 3 tamam
+sahne 4 tamam
+sahne 5 tamam
