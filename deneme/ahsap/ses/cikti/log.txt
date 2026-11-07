@@ -25,3 +25,5 @@ HATA mmaudio yavas4 AppError('The upstream Gradio app has raised an exception bu
 yavas4 tamam foley
 HATA mmaudio yavas5 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
 HATA foley yavas5 AppError('You have exceeded your ZeroGPU quota (180s requested vs. 171s left). Try again in 23:59:48. Authenticate with a Hugging Face token for more quota - https://huggingface.co/settings/tokens')
+HATA mmaudio yavas5 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
+HATA foley yavas5 AppError('You have exceeded your ZeroGPU quota (180s requested vs. 143s left). Try again in 18:20:33. Authenticate with a Hugging Face token for more quota - https://huggingface.co/settings/tokens')
