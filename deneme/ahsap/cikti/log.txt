@@ -19,3 +19,22 @@ Named API endpoints: 1
 kare4 tamam
 kare3 tamam
 HATA kare2 AppError('You have exceeded your ZeroGPU runs limit. Authenticate with a Hugging Face token for more quota - https://huggingface.co/settings/tokens')
+API mcp-tools/FLUX.1-Kontext-Dev
+Client.predict() Usage Info
+---------------------------
+Named API endpoints: 1
+
+ - predict(input_image, prompt, seed, randomize_seed, guidance_scale, steps, api_name="/infer") -> (result, seed)
+    Parameters:
+     - [Image] input_image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) (required)  (For input, either path or url must be provided. For output, path is always provided.) 
+     - [Textbox] prompt: str (required)  
+     - [Slider] seed: float (not required, defaults to:   0)  
+     - [Checkbox] randomize_seed: bool (not required, defaults to:   True)  
+     - [Slider] guidance_scale: float (not required, defaults to:   2.5)  
+     - [Slider] steps: float (not required, defaults to:   20)  
+    Returns:
+     - [Image] result: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)) 
+     - [Slider] seed: float (numeric value between 0 and 2147483647) 
+
+kare2 tamam
+kare1 tamam
