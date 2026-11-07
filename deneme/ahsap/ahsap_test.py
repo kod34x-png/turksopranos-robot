@@ -4,7 +4,7 @@ duzenlenerek uretilir ki tezgah, eller ve isik sabit kalsin."""
 import os, shutil, pathlib, traceback
 from gradio_client import Client, handle_file
 
-T = os.environ.get("HF_TOKEN") or None
+T = None if os.environ.get("ANONIM") else (os.environ.get("HF_TOKEN") or None)
 OUT = pathlib.Path("deneme/ahsap/cikti"); OUT.mkdir(parents=True, exist_ok=True)
 LOG = open(OUT / "log.txt", "a")
 def log(m): print(m, flush=True); LOG.write(m + "\n"); LOG.flush()
