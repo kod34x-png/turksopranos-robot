@@ -6,3 +6,4 @@ HATA yavas1 AppError('The upstream Gradio app has raised an exception but has no
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
+HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
