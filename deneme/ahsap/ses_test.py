@@ -33,7 +33,7 @@ for ad, p in KOMUT:
     if v.exists():
         continue
     try:
-        r = c.predict(handle_file(str(D / f"{ad}.mp4")), p, NEG, 2026, 25, 4.5, 8, api_name="/predict")
+        r = c.predict({"video": handle_file(str(D / f"{ad}.mp4"))}, p, NEG, 2026, 25, 4.5, 8, api_name="/video_to_audio")
         shutil.copy(yol(r), v); log(ad + " tamam")
     except Exception as e:
         log("HATA " + ad + " " + repr(e)[:400]); traceback.print_exc(); break
