@@ -1,0 +1,1 @@
+HATA yavas1 ValueError('Cannot find a function with `api_name`: /predict.')

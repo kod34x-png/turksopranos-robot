@@ -1,0 +1,35 @@
+Client.predict() Usage Info
+---------------------------
+Named API endpoints: 2
+
+ - predict(video, prompt, negative_prompt, seed, num_steps, cfg_strength, duration, api_name="/video_to_audio") -> output
+    Parameters:
+     - [Video] video: filepath (required)  (The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.
+
+Attributes:
+    path: The server file path where the file is stored.
+    url: The normalized server URL pointing to the file.
+    size: The size of the file in bytes.
+    orig_name: The original filename before upload.
+    mime_type: The MIME type of the file.
+    is_stream: Indicates whether the file is a stream.
+    meta: Additional metadata used internally (should not be changed).) 
+     - [Textbox] prompt: str (required)  
+     - [Textbox] negative_prompt: str (not required, defaults to:   music)  
+     - [Number] seed: int (not required, defaults to:   -1)  
+     - [Number] num_steps: int (not required, defaults to:   25)  
+     - [Number] cfg_strength: float (not required, defaults to:   4.5)  
+     - [Number] duration: float (not required, defaults to:   8)  
+    Returns:
+     - [Video] output: filepath 
+
+ - predict(prompt, negative_prompt, seed, num_steps, cfg_strength, duration, api_name="/text_to_audio") -> output
+    Parameters:
+     - [Textbox] prompt: str (required)  
+     - [Textbox] negative_prompt: str (required)  
+     - [Number] seed: int (not required, defaults to:   -1)  
+     - [Number] num_steps: int (not required, defaults to:   25)  
+     - [Number] cfg_strength: float (not required, defaults to:   4.5)  
+     - [Number] duration: float (not required, defaults to:   8)  
+    Returns:
+     - [Audio] output: filepath 
