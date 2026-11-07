@@ -13,7 +13,7 @@ def log(m): print(m, flush=True); LOG.write(m + "\n"); LOG.flush()
 
 def yol(r):
     if isinstance(r, (list, tuple)): r = r[0]
-    if isinstance(r, dict): r = r.get("path") or r.get("url") or r.get("image")
+    if isinstance(r, dict): r = r.get("video") or r.get("path") or r.get("url") or r.get("image")
     return r
 
 SAHNE = ("Overhead close-up photo, only a craftsman's two hands visible on an old dark wooden workbench, "
@@ -76,8 +76,23 @@ for i, (ad, p) in enumerate(ASAMALAR, 2):
     except Exception as e:
         log("HATA " + ad + " " + repr(e)[:400]); traceback.print_exc(); break
 
-try:
-    vc = Client("mcp-tools/wan-2-2-first-last-frame", token=T)
-    log("API WAN\n" + str(vc.view_api(print_info=False, return_format="str"))[:3000])
-except Exception as e:
-    log("wan acilmadi " + repr(e)[:200])
+# Gecis videolari: her iki kare arasi oyma hareketi
+GECIS = [
+    ("gecis1", "kare1", "kare2", "Hands carving the wooden block with a small knife, wood shavings curling off and falling, the block slowly taking the shape of a small car, steady overhead camera, realistic woodworking ASMR"),
+    ("gecis2", "kare2", "kare3", "The right hand slices thin wood curls from the wooden car roof with a knife, shavings falling, steady camera, realistic slow woodworking"),
+    ("gecis3", "kare3", "kare4", "The hand puts the knife away and rubs sandpaper along the side of the wooden car, fine dust, steady camera, realistic slow motion"),
+    ("gecis4", "kare4", "kare5", "The hands finish sanding and gently lift and present the finished wooden toy car, steady camera, realistic slow motion"),
+]
+NEG = "extra hands, third hand, extra fingers, deformed hands, fused fingers, morphing, camera shake, cuts, text, watermark, blurry, static frame"
+vc = Client("mcp-tools/wan-2-2-first-last-frame", token=T)
+for ad, a_, b_, p in GECIS:
+    v = OUT / f"{ad}.mp4"
+    if v.exists():
+        continue
+    try:
+        r = vc.predict(start_image_pil=handle_file(str(OUT / f"{a_}.png")), end_image_pil=handle_file(str(OUT / f"{b_}.png")),
+                       prompt=p, negative_prompt=NEG, duration_seconds=3.5, steps=8, guidance_scale=1.0,
+                       guidance_scale_2=1.0, seed=777, randomize_seed=False, api_name="/generate_video")
+        shutil.copy(yol(r), v); log(ad + " tamam")
+    except Exception as e:
+        log("HATA " + ad + " " + repr(e)[:300]); break
