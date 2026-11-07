@@ -25,18 +25,6 @@ KOMUT = [
 ]
 
 c = Client("hkchengrex/MMAudio")
-# Teshis: alan calisiyor mu? (metinden ses)
-try:
-    t = c.predict("knife carving wood, close-up ASMR", NEG, 1, 25, 4.5, 4, api_name="/text_to_audio")
-    log("TESHIS metinden ses calisti: " + str(t)[:150])
-except Exception as e:
-    log("TESHIS metinden ses HATA " + repr(e)[:200])
-# Hunyuan Foley API kaydi (yedek)
-try:
-    hf = Client("tencent/HunyuanVideo-Foley")
-    (OUT / "api_foley.txt").write_text(str(hf.view_api(print_info=False, return_format="str")))
-except Exception as e:
-    log("foley acilmadi " + repr(e)[:200])
 if not (OUT / "api.txt").exists():
     (OUT / "api.txt").write_text(str(c.view_api(print_info=False, return_format="str")))
 
@@ -45,7 +33,13 @@ for ad, p in KOMUT:
     if v.exists():
         continue
     try:
-        r = c.predict({"video": handle_file(str(D / f"{ad}.mp4"))}, p, NEG, 2026, 25, 4.5, 8, api_name="/video_to_audio")
-        shutil.copy(yol(r), v); log(ad + " tamam")
+        r = c.predict({"video": handle_file(str(D / f"{ad}.mp4"))}, p, NEG, 2026, 25, 4.5, 5, api_name="/video_to_audio")
+        shutil.copy(yol(r), v); log(ad + " tamam mmaudio")
     except Exception as e:
-        log("HATA " + ad + " " + repr(e)[:400]); traceback.print_exc(); break
+        log("HATA mmaudio " + ad + " " + repr(e)[:200])
+        try:
+            fc = Client("tencent/HunyuanVideo-Foley")
+            r = fc.predict({"video": handle_file(str(D / f"{ad}.mp4"))}, p, NEG, 4.5, 25, 1, api_name="/process_inference")
+            shutil.copy(yol(r), v); log(ad + " tamam foley")
+        except Exception as e2:
+            log("HATA foley " + ad + " " + repr(e2)[:300]); break

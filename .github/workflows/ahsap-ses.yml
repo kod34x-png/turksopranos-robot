@@ -21,6 +21,7 @@ jobs:
       - run: python deneme/ahsap/ses_test.py
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          ANONIM: "1"
       - name: Sonucu dala yaz
         if: always()
         run: |
