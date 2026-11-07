@@ -1,0 +1,111 @@
+Client.predict() Usage Info
+---------------------------
+Named API endpoints: 10
+
+ - predict(sample_nums, api_name="/update_visibility") -> (sample_1, sample_2, sample_3, sample_4, sample_5, sample_6)
+    Parameters:
+     - [Slider] sample_nums: float (not required, defaults to:   1)  
+    Returns:
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_2: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_3: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_4: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_5: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_6: dict(video: filepath, subtitles: filepath | None) 
+
+ - predict(video_file, text_prompt, neg_prompt, guidance_scale, inference_steps, sample_nums, api_name="/process_inference") -> (sample_1, sample_2, sample_3, sample_4, sample_5, sample_6, status)
+    Parameters:
+     - [Video] video_file: dict(video: filepath, subtitles: filepath | None) (required)  
+     - [Textbox] text_prompt: str (required)  
+     - [Textbox] neg_prompt: str (required)  
+     - [Slider] guidance_scale: float (not required, defaults to:   4.5)  
+     - [Slider] inference_steps: float (not required, defaults to:   50)  
+     - [Slider] sample_nums: float (not required, defaults to:   1)  
+    Returns:
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_2: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_3: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_4: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_5: dict(video: filepath, subtitles: filepath | None) 
+     - [Video] sample_6: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_1") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_2") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_3") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_4") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_5") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_6") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 
+
+ - predict(api_name="/handler_7") -> (upload_video, _audio_description_english, _negative_prompt, sample_1, status)
+    Parameters:
+     - None
+    Returns:
+     - [Video] upload_video: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] _audio_description_english: str 
+     - [Textbox] _negative_prompt: str 
+     - [Video] sample_1: dict(video: filepath, subtitles: filepath | None) 
+     - [Textbox] status: str 

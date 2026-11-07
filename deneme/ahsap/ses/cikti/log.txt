@@ -7,3 +7,5 @@ HATA yavas1 AppError('The upstream Gradio app has raised an exception but has no
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
 HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
+TESHIS metinden ses HATA AppError('You have exceeded your free ZeroGPU quota (120s requested vs. 0s left). Try again in 0:00:00. Subscribe to Hugging Face PRO to get 25 min of ZeroGPU quota a day - https://huggingface.co/subs
+HATA yavas1 AppError('The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().')
