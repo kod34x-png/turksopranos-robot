@@ -26,22 +26,19 @@ SON = (SAHNE + "Both hands gently hold a finished hand-carved wooden scale model
        "between rectangular headlights, thick straight bumpers, " + AHSAP + ", smooth satin oiled finish. "
        "A carving knife and curly wood shavings lie on the bench.")
 
-# Geriye dogru: bitmis arabadan kalasa
+# Geriye dogru: zimpara karesinden kalasa. Her karede yalnizca IKI el.
+IKI = (" Exactly two human hands in the whole image, no third hand: the left hand at the bottom holds the wood, "
+       "the right hand at the top holds the tool. Same camera angle, workbench and window light.")
 ASAMALAR = [
-    ("kare4", "Keep the same workbench, lighting, camera angle and the same wooden car shape. The left hand holds the car "
-              "and the right hand rubs a folded piece of beige sandpaper along its side, the surface slightly less glossy, "
-              "fine pale wood dust on the bench. The car stays raw natural walnut wood, no paint."),
-    ("kare3", "Keep the same workbench, lighting, camera angle and the same car shape. Make the wooden car look unfinished: "
-              "rough raw surface covered with small knife facets, edges less refined, no oil finish. The left hand holds it, "
-              "the right hand holds a small carving knife cutting a curl from the hood. More wood shavings on the bench."),
-    ("kare2", "Keep the same workbench, lighting, camera angle and hands. Make the wood much less finished: only a coarse "
-              "boxy rough-out of the car's basic silhouette, no wheels, windows or grille details yet, big angular knife cuts, "
-              "the right hand holds the carving knife. Many wood shavings."),
-    ("kare1", "Keep the same workbench, lighting, camera angle and hands. Replace the carved piece with a plain uncut "
-              "rectangular block of light walnut wood, 15 cm long, sharp square edges, the right hand touches its corner "
-              "with the carving knife. Just a few shavings on the bench."),
+    ("kare4", "unused"),
+    ("kare3", "Remove the sandpaper. The right hand at the top now holds a small carving knife slicing a thin curl from the roof. "
+              "Make the wooden car clearly unfinished: rough raw surface covered with visible flat knife facets, "
+              "softer less refined details, wheels only roughly shaped, no polish." + IKI),
+    ("kare2", "Make the wood much less finished: only a coarse boxy rough-out of the car's basic silhouette with big angular "
+              "knife cuts, no wheels, no windows, no grille details yet, many fresh wood shavings." + IKI),
+    ("kare1", "Replace the carved piece with a plain uncut rectangular block of light walnut wood, 15 cm long, sharp square "
+              "edges, the knife touching one corner, just a few shavings on the bench." + IKI),
 ]
-
 k5 = OUT / "kare5.png"
 if not k5.exists():
     g = Client("mcp-tools/Z-Image-Turbo", token=T)
@@ -74,7 +71,13 @@ for i, (ad, p) in enumerate(ASAMALAR, 2):
         onceki = k; continue
     try:
         # Her asama bir oncekinden duzenlenir: asamalar arasi tutarlilik
-        r = duzenle(onceki, p, 5131 + i)
+        r = duzenle(onceki, p, 6262 + i)
         shutil.copy(yol(r), k); log(ad + " tamam"); onceki = k
     except Exception as e:
         log("HATA " + ad + " " + repr(e)[:400]); traceback.print_exc(); break
+
+try:
+    vc = Client("mcp-tools/wan-2-2-first-last-frame", token=T)
+    log("API WAN\n" + str(vc.view_api(print_info=False, return_format="str"))[:3000])
+except Exception as e:
+    log("wan acilmadi " + repr(e)[:200])
