@@ -1,0 +1,31 @@
+name: Ahsap ASMR Ses
+on:
+  push:
+    branches: [ahsap-test]
+    paths: ["deneme/ahsap/ses_test.py", ".github/workflows/ahsap-ses.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ahsap-ses
+jobs:
+  dene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q gradio_client
+      - run: python deneme/ahsap/ses_test.py
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          ANONIM: "1"
+      - name: Sonucu dala yaz
+        if: always()
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add deneme/ahsap/ses/cikti || true
+          git commit -qm "Ahsap ses sonucu" && git pull -q --rebase && git push -q || echo "cikti yok"

@@ -2,7 +2,7 @@ name: Ahsap Oyma Denemesi
 on:
   push:
     branches: [ahsap-test]
-    paths: ["deneme/ahsap/*.py", ".github/workflows/ahsap-test.yml"]
+    paths: ["deneme/ahsap/ahsap_test.py", ".github/workflows/ahsap-test.yml"]
   workflow_dispatch:
 permissions:
   contents: write
