@@ -25,6 +25,18 @@ KOMUT = [
 ]
 
 c = Client("hkchengrex/MMAudio")
+# Teshis: alan calisiyor mu? (metinden ses)
+try:
+    t = c.predict("knife carving wood, close-up ASMR", NEG, 1, 25, 4.5, 4, api_name="/text_to_audio")
+    log("TESHIS metinden ses calisti: " + str(t)[:150])
+except Exception as e:
+    log("TESHIS metinden ses HATA " + repr(e)[:200])
+# Hunyuan Foley API kaydi (yedek)
+try:
+    hf = Client("tencent/HunyuanVideo-Foley")
+    (OUT / "api_foley.txt").write_text(str(hf.view_api(print_info=False, return_format="str")))
+except Exception as e:
+    log("foley acilmadi " + repr(e)[:200])
 if not (OUT / "api.txt").exists():
     (OUT / "api.txt").write_text(str(c.view_api(print_info=False, return_format="str")))
 
