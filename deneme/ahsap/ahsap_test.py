@@ -2,9 +2,11 @@
 Once 1. kare (ham kalas + eller) uretilir, sonraki asamalar ayni kare
 duzenlenerek uretilir ki tezgah, eller ve isik sabit kalsin."""
 import os, shutil, pathlib, traceback
+if os.environ.get("ANONIM"):
+    os.environ.pop("HF_TOKEN", None)  # kutuphane bu degiskeni kendiliginden okuyor
 from gradio_client import Client, handle_file
 
-T = None if os.environ.get("ANONIM") else (os.environ.get("HF_TOKEN") or None)
+T = os.environ.get("HF_TOKEN") or None
 OUT = pathlib.Path("deneme/ahsap/cikti"); OUT.mkdir(parents=True, exist_ok=True)
 LOG = open(OUT / "log.txt", "a")
 def log(m): print(m, flush=True); LOG.write(m + "\n"); LOG.flush()
