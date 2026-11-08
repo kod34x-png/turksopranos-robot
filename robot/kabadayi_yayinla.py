@@ -19,7 +19,9 @@ if os.environ.get("ELLE") != "evet" and (simdi.weekday() != 5 or simdi.strftime(
 b = next((x for x in json.load(open(KOK / "icerik/kabadayi.json", encoding="utf-8"))
           if x["durum"] == "onayli" and x["no"] not in biten and (KOK / f"medya/kabadayi/{x['no']}.mp4").exists()), None)
 if not b:
-    print("Hazir bolum yok, bu hafta atlandi."); sys.exit(0)
+    print("Hazir bolum yok, bu hafta atlandi.")
+    # 16:00'dan sonra hala bolum yoksa is basarisiz biter: GitHub Ozgur'e e-posta atar.
+    sys.exit(1 if simdi.weekday() == 5 and simdi.strftime("%H:%M") >= "16:00" else 0)
 TOKEN = os.environ["IG_TOKEN"]
 
 def istek(method, url, params):
@@ -56,3 +58,5 @@ except Exception as e:
 sonuc["zaman"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 yapilan = [k for k in yapilan if not (k["no"] == b["no"] and "hata" in k)] + [sonuc]
 json.dump(yapilan, open(DURUM, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+if "hata" in sonuc:
+    sys.exit(1)                                   # yayin hatasi: is basarisiz biter, e-posta gider

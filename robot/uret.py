@@ -222,11 +222,50 @@ def kapak():
     im.convert("RGB").save(yol, quality=92)
     return yol
 
+# ------------------------------------------------------------------ ses (deney: takvimde "ses": true)
+# Emekli kabadayı sesi ilk satırı t≈0,15'te okur; müzik konuşma boyunca ≥8 dB altında kalır.
+SES_ADI = "tr-TR-AhmetNeural"
+SES_BASLA = 0.15
+
+def ses_uret(metin, yol):
+    """İlk satırı seslendirir. SES_DOSYA ortam değişkeni verilirse (yerel test) onu kullanır."""
+    if os.environ.get("SES_DOSYA"):
+        return os.environ["SES_DOSYA"]
+    try:
+        import asyncio, edge_tts
+        asyncio.run(edge_tts.Communicate(metin, SES_ADI, rate="-18%", pitch="-12Hz").save(yol))
+        return yol
+    except Exception as e:                       # ses üretilemezse Reel sessiz çıkar, yayın durmaz
+        print("SES ÜRETİLEMEDİ, sessiz devam:", repr(e)[:200])
+        return None
+
+def ses_suresi(yol):
+    return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                                          "-of", "csv=p=0", yol]).decode())
+
+def sesi_karistir(muzik_wav, ses_yol, cikti_wav, toplam):
+    ms = int(SES_BASLA * 1000)
+    fc = (f"[1:a]aresample=44100,asetrate=44100*0.91,aresample=44100,atempo=1.0989,lowpass=f=6500,highpass=f=70,"
+          f"aformat=channel_layouts=stereo,aecho=0.8:0.5:45:0.18,acompressor=threshold=-18dB:ratio=3,volume=1.8,"
+          f"adelay={ms}|{ms},apad,asplit=2[se][ka];"
+          f"[0:a]aresample=44100,aformat=channel_layouts=stereo,volume=0.32[mu];"
+          f"[mu][ka]sidechaincompress=threshold=0.02:ratio=10:attack=5:release=350[md];"
+          f"[md][se]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95[a]")
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", muzik_wav, "-i", ses_yol, "-filter_complex", fc,
+                    "-map", "[a]", "-t", f"{toplam:.2f}", "-ar", "44100", cikti_wav], check=True)
+
 # ------------------------------------------------------------------ reel
 def reel():
     W, H, FPS = 1080, 1920, 30
     satirlar = [list(s) for s in gun["reel"]]
     satirlar[-1][2] += 1.2                      # son soru ekranda daha uzun kalsın (yorum için)
+    sesli = bool(gun.get("ses")); ses_yol = None
+    if sesli:
+        ses_yol = ses_uret(satirlar[0][0].replace("\n", " ").replace("...", "").strip(), os.path.join(OUT, "ses.mp3"))
+        sesli = ses_yol is not None
+        if sesli:                                   # ses ilk satır bitmeden bitsin
+            satirlar[0][2] = max(satirlar[0][2], SES_BASLA + ses_suresi(ses_yol) + 0.35)
+            print("Sesli Reel, ilk satır", round(satirlar[0][2], 2), "sn")
     katmanlar, zamanlar, t0 = [], [], 0.0
     for metin, vurgu, sure in satirlar:
         katmanlar.append(yazi_katmani(W, H, metin, vurgu, boyut_sec(metin, W)))
@@ -237,12 +276,17 @@ def reel():
         yazi_katmani(W, H, "Takip et, kaçırma.", "Takip", 72, y_merkez=H * 0.60))
     katmanlar.append(cta); zamanlar.append((t0, 2.8)); t0 += 2.8
     toplam = t0 + 0.5
+    bb = katmanlar[0].getbbox() or (0, 0, W, H)          # ilk satır yazısının genişliği
+    zum = max(1.0, min(1.12, (W - 60) / max(1, W - 2 * min(bb[0], W - bb[2]))))
     bg, noise = arka_plan(W, H)
     hf = ImageFont.truetype(SANS, 38)
     seri = ImageFont.truetype(SANS, 34)
     wav = os.path.join(OUT, "muzik.wav")
     secim = muzik_secimi(gun["tarih"], gun["no"]); print("Müzik:", secim["stil"], secim["bpm"], "BPM")
     muzik(toplam, [s for s, _ in zamanlar], wav, secim)
+    if sesli:
+        karisik = os.path.join(OUT, "karisik.wav")
+        sesi_karistir(wav, ses_yol, karisik, toplam); os.replace(karisik, wav)
     mp4 = os.path.join(OUT, "reel.mp4")
     p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
         "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", wav,
@@ -262,6 +306,8 @@ def reel():
                 p_ = (t - s) / sure
                 a = (1 if s == 0 else min(1, (t - s) / 0.3)) * min(1, (s + sure - t) / 0.25)
                 sc = 1.0 + 0.04 * p_
+                if sesli and s == 0 and t < 0.4:      # ilk 0,4 sn: 1,12'den 1,0'a yakınlaşma (yazı taşmaz)
+                    sc = 1.0 + (zum - 1.0) * (1 - (t / 0.4) ** 0.6)
                 Ls = L.resize((int(W * sc), int(H * sc)), Image.BILINEAR)
                 ox, oy = (Ls.width - W) // 2, (Ls.height - H) // 2
                 Ls = Ls.crop((ox, oy, ox + W, oy + H))

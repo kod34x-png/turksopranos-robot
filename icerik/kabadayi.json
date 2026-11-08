@@ -1,12 +1,38 @@
 [
  {
-  "no": 1,
-  "durum": "uret",
+  "no": 2,
+  "durum": "onayli",
+  "ses": "Evlat. Babanın alın terini masaya süren, kazansa da kaybeder. Kalk. Eve git.",
+  "ses_sahne": 3,
+  "aciklama": "Kabadayı Girseydi #2. Bazı masalardan kazanarak da kalkamazsın. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "sahneler": [
+   {
+    "yazi": "Babasının dükkânını masaya sürdü.",
+    "sure": 4
+   },
+   {
+    "yazi": "Sonra kapı açıldı.",
+    "sure": 4
+   },
+   {
+    "sure": 4
+   },
+   {
+    "sure": 4
+   },
+   {
+    "sure": 4
+   }
+  ]
+ },
+ {
+  "no": 3,
+  "durum": "onayli",
   "stil": "Photorealistic cinematic film still, present day Istanbul, moody low-key light, 35mm film grain, muted colors, crime drama, no text, no letters, no logos, no brand names. ",
   "ses": "Karun gibi yığdın. Yedi sülalen yese bitmez. Aşağıda adam elli lira hesabı yapıyor. Kadehini bırak. Bu paranın sahibi var.",
-  "ses_sahne": 3,
+  "ses_sahne": 1,
   "not": "Bu video kurgudur. Gerçek kişi ve kurumlarla ilgisi yoktur.",
-  "aciklama": "Kabadayı Girseydi #1. Yukarıda kadehler, aşağıda elli liranın hesabı. Sen olsan ne derdin?\n\nBu video kurgudur; gerçek kişi ve kurumlarla ilgisi yoktur.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "aciklama": "Kabadayı Girseydi #3. Yukarıda kadehler, aşağıda elli liranın hesabı.\nBunu emeğinin hakkı yenmiş birine gönder.\nHer Cumartesi yeni bölüm — takip et.\n\nBu video kurgudur; gerçek kişi ve kurumlarla ilgisi yoktur.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
   "sahneler": [
    {
     "gorsel": "Close-up of an old retired man's wrinkled trembling hands counting a few small banknotes over an open worn paper notebook on a small grocery counter, dim warm light, sad mood.",
@@ -39,37 +65,11 @@
   ]
  },
  {
-  "no": 2,
-  "durum": "onayli",
-  "ses": "Evlat. Babanın alın terini masaya süren, kazansa da kaybeder. Kalk. Eve git.",
-  "ses_sahne": 3,
-  "aciklama": "Kabadayı Girseydi #2. Bazı masalardan kazanarak da kalkamazsın. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
-  "sahneler": [
-   {
-    "yazi": "Babasının dükkânını masaya sürdü.",
-    "sure": 4
-   },
-   {
-    "yazi": "Sonra kapı açıldı.",
-    "sure": 4
-   },
-   {
-    "sure": 4
-   },
-   {
-    "sure": 4
-   },
-   {
-    "sure": 4
-   }
-  ]
- },
- {
-  "no": 3,
+  "no": 4,
   "durum": "taslak",
   "ses": "Ortağını satan, önce kendi adını satar. Kalemi bırak. Git, helalleş.",
-  "ses_sahne": 3,
-  "aciklama": "Kabadayı Girseydi #3. İmza kâğıda atılır, ad insanın üstünde kalır. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "ses_sahne": 1,
+  "aciklama": "Kabadayı Girseydi #4. İmza kâğıda atılır, ad insanın üstünde kalır.\nBunu ortağına güvenen birine gönder.\nHer Cumartesi yeni bölüm — takip et.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
   "sahneler": [
    {
     "gorsel": "Close-up of a man's hand holding a fountain pen over a contract on a dark wooden office desk, a second signature being copied from another paper, desk lamp light.",
@@ -104,11 +104,11 @@
   ]
  },
  {
-  "no": 4,
+  "no": 5,
   "durum": "taslak",
   "ses": "Yaşlı adamın önünde bağıran, kendi küçüklüğünü duyurur. Çık dışarı. Borcunu konuşuruz.",
-  "ses_sahne": 3,
-  "aciklama": "Kabadayı Girseydi #4. Güç bağırmakla ölçülmez. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "ses_sahne": 1,
+  "aciklama": "Kabadayı Girseydi #5. Güç bağırmakla ölçülmez.\nBunu sesini değil sözünü yükselten birine gönder.\nHer Cumartesi yeni bölüm — takip et.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
   "sahneler": [
    {
     "gorsel": "Medium shot inside a small old Istanbul grocery shop, an elderly shopkeeper behind the counter looking down, a young man in a leather jacket leaning over the counter shouting, tungsten light.",
@@ -143,11 +143,11 @@
   ]
  },
  {
-  "no": 5,
+  "no": 6,
   "durum": "taslak",
   "ses": "Anasını unutan el, kimseye güç vermez. Al o parayı. Eczaneye git.",
-  "ses_sahne": 3,
-  "aciklama": "Kabadayı Girseydi #5. Gücün ilk borcu anaya. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "ses_sahne": 1,
+  "aciklama": "Kabadayı Girseydi #6. Gücün ilk borcu anaya.\nBunu annesinin duasını alan birine gönder.\nHer Cumartesi yeni bölüm — takip et.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
   "sahneler": [
    {
     "gorsel": "Close-up on a dark tea house table: a young man's hand slides folded banknotes and a pharmacy prescription into a jacket pocket, tea glasses around, warm dim light.",
@@ -182,11 +182,11 @@
   ]
  },
  {
-  "no": 6,
+  "no": 7,
   "durum": "taslak",
   "ses": "Tapu çürür, kardeş kalır. Bırak o dosyayı. Git, kapısını çal.",
-  "ses_sahne": 3,
-  "aciklama": "Kabadayı Girseydi #6. Mirası kazanıp kardeşi kaybetmek de bir yenilgi. Sen olsan ne yapardın?\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
+  "ses_sahne": 1,
+  "aciklama": "Kabadayı Girseydi #7. Mirası kazanıp kardeşi kaybetmek de bir yenilgi.\nBunu kardeşiyle küs birine gönder.\nHer Cumartesi yeni bölüm — takip et.\n\n#türksopranos #kabadayı #sokakdersi #motivasyon",
   "sahneler": [
    {
     "gorsel": "Medium shot in an old Istanbul courthouse corridor, two middle-aged brothers on opposite benches holding thick legal folders, not looking at each other, cold window light.",

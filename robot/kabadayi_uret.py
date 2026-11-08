@@ -70,12 +70,16 @@ def uret(b, klasor):
         except Exception as e:
             kaydet("video durdu: " + repr(e)[:300]); return
 
-def yazi_katmani(metin, boyut, y, yol):
+KREM, ALTIN = (245, 235, 215, 255), (222, 178, 84, 255)
+HANDLE = "@turksopranos"
+ANLATI_Y, KONUSMA_Y = 300, 1250        # anlatı yazısı üstte (altın), konuşma altyazısı ortanın altında (krem)
+
+def yazi_katmani(metin, boyut, y, yol, renk=KREM, kontur=7):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     f = ImageFont.truetype(YAZI_FONT, boyut)
     for s in textwrap.wrap(metin, width=int(1600 / boyut)):
-        d.text(((W - d.textlength(s, font=f)) / 2, y), s, font=f, fill=(245, 235, 215, 255),
-               stroke_width=7, stroke_fill=(0, 0, 0, 235))
+        d.text(((W - d.textlength(s, font=f)) / 2, y), s, font=f, fill=renk,
+               stroke_width=kontur, stroke_fill=(0, 0, 0, 235))
         y += int(boyut * 1.3)
     im.save(yol); return yol
 
@@ -111,30 +115,44 @@ def montaj(b, klasor, cikti, kapak, gecici):
     gecik = max(0.0, baslar[b["ses_sahne"] - 1] - parca[0][0] + 0.2)
     ses_son = gecik + sure(ses)
     govde = sum(sureler); uzat = max(0.0, ses_son - govde + 0.3)
-    govde += uzat; KART = 2.5; TOPLAM = round(govde + KART, 2)
+    KART = 2.5; govde += uzat; TOPLAM = round(govde + KART, 2)
     ns["muzik"](TOPLAM, [*baslar], str(gecici / "muzik.wav"), ns["muzik_secimi"]("2026-11-07", b["no"]))
     gir = []; fc = ""
     for i, s in enumerate(sahneler):
         gir += ["-i", str(s)]
-        ek = f",tpad=stop_mode=clone:stop_duration={uzat:.2f}" if i == len(sahneler) - 1 and uzat else ""
+        ek = f",tpad=stop_mode=clone:stop_duration={uzat + KART:.2f}" if i == len(sahneler) - 1 else ""
         fc += (f"[{i}:v]scale=-2:{H}:flags=lanczos,crop={W}:{H},unsharp=5:5:0.7,"
                f"minterpolate=fps=30:mi_mode=mci:mc_mode=aobmc:vsbmc=1{ek},setsar=1[s{i}];")
     n = len(sahneler)
-    gir += ["-f", "lavfi", "-t", str(KART), "-i", f"color=c=black:s={W}x{H}:r=30"]
-    fc += "".join(f"[s{i}]" for i in range(n)) + f"[{n}:v]concat=n={n + 1}:v=1:a=0,format=yuv420p[t0];"
-    n += 1; son = "t0"; yazilar = []
+    fc += "".join(f"[s{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=0,format=yuv420p[t0];"
+    son = "t0"; yazilar = []
     for i, s in enumerate(b["sahneler"]):
         if s.get("yazi"):
-            yazilar.append((s["yazi"], baslar[i] + 0.2, baslar[i] + sureler[i] - 0.2))
+            yazilar.append((s["yazi"], baslar[i] + (0.0 if i == 0 else 0.2), baslar[i] + sureler[i] - 0.2, "anlati"))
     for j, (m, (p0, p1)) in enumerate(zip(cumleler, parca)):
-        bitis = (parca[j + 1][0] + gecik - 0.1) if j + 1 < len(parca) else govde - 0.1
-        yazilar.append((m, p0 + gecik - 0.1, bitis))
-    for j, (m, x0, x1) in enumerate(yazilar):
-        gir += ["-i", yazi_katmani(m, 70 if len(m) > 20 else 92, 1480, str(gecici / f"y{j}.png"))]
+        bitis = (parca[j + 1][0] + gecik - 0.1) if j + 1 < len(parca) else min(govde - 0.1, p1 + gecik + 1.2)
+        yazilar.append((m, max(0.0, p0 + gecik - 0.1), bitis, "konusma"))
+    for j, (m, x0, x1, tur) in enumerate(yazilar):
+        if tur == "anlati":
+            k = yazi_katmani(m, 62 if len(m) > 24 else 74, ANLATI_Y, str(gecici / f"y{j}.png"), ALTIN, 6)
+        else:
+            k = yazi_katmani(m, 70 if len(m) > 20 else 92, KONUSMA_Y, str(gecici / f"y{j}.png"))
+        gir += ["-i", k]
         fc += f"[{son}][{n}:v]overlay=enable='between(t,{x0:.2f},{x1:.2f})'[u{j}];"; son = f"u{j}"; n += 1
-    gir += ["-i", yazi_katmani("KABADAYI GİRSEYDİ", 84, 820, str(gecici / "k1.png"))]
-    fc += f"[{son}][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k1];"; n += 1
-    gir += ["-i", yazi_katmani("Takip et. Kapı yine açılacak.", 52, 960, str(gecici / "k2.png"))]
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)   # köşede kimlik
+    hf = ImageFont.truetype(YAZI_FONT, 34)
+    d.text((W - 60 - d.textlength(HANDLE, font=hf), 170), HANDLE, font=hf, fill=(245, 235, 215, 190),
+           stroke_width=3, stroke_fill=(0, 0, 0, 160))
+    im.save(gecici / "imza.png"); gir += ["-i", str(gecici / "imza.png")]
+    fc += f"[{son}][{n}:v]overlay=enable='lt(t,{govde:.2f})'[im];"; son = "im"; n += 1
+    Image.new("RGBA", (W, H), (0, 0, 0, 175)).save(gecici / "karart.png")  # kapanış: son sahne kararır
+    gir += ["-i", str(gecici / "karart.png")]
+    fc += f"[{son}][{n}:v]overlay=enable='gte(t,{govde:.2f})'[ka0];"; son = "ka0"; n += 1
+    gir += ["-i", yazi_katmani("KABADAYI GİRSEYDİ", 84, 760, str(gecici / "k1.png"), ALTIN)]
+    fc += f"[{son}][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k0];"; n += 1
+    gir += ["-i", yazi_katmani("Her Cumartesi · " + HANDLE, 54, 890, str(gecici / "k1b.png"))]
+    fc += f"[k0][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k1];"; n += 1
+    gir += ["-i", yazi_katmani("Takip et. Kapı yine açılacak.", 50, 990, str(gecici / "k2.png"))]
     fc += f"[k1][{n}:v]overlay=enable='gte(t,{govde + .1:.2f})'[k2];"; n += 1
     if b.get("not"):
         gir += ["-i", yazi_katmani(b["not"], 36, 1120, str(gecici / "k3.png"))]
@@ -146,8 +164,8 @@ def montaj(b, klasor, cikti, kapak, gecici):
     ms = int(gecik * 1000)
     fc += (f"[{sv}:a]aresample=44100,asetrate=44100*0.91,aresample=44100,atempo=1.0989,lowpass=f=6500,highpass=f=70,"
            f"aformat=channel_layouts=stereo,aecho=0.8:0.5:45:0.18,acompressor=threshold=-18dB:ratio=3,volume=1.6,"
-           f"adelay={ms}|{ms},apad,asplit=2[se][ka];[{mz}:a]aresample=44100,aformat=channel_layouts=stereo,volume=0.55[mu];"
-           f"[mu][ka]sidechaincompress=threshold=0.04:ratio=8:attack=20:release=400[md];"
+           f"adelay={ms}|{ms},apad,asplit=2[se][ka];[{mz}:a]aresample=44100,aformat=channel_layouts=stereo,volume=0.32[mu];"
+           f"[mu][ka]sidechaincompress=threshold=0.02:ratio=10:attack=5:release=350[md];"
            f"[md][se]amix=inputs=2:duration=first:normalize=0,afade=t=out:st={TOPLAM - 1:.2f}:d=1,alimiter=limit=0.95[a]")
     subprocess.run(["ffmpeg", "-y", "-v", "error"] + gir + ["-filter_complex", fc, "-map", "[v]", "-map", "[a]",
                     "-t", str(TOPLAM), "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
@@ -156,7 +174,8 @@ def montaj(b, klasor, cikti, kapak, gecici):
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "1.5", "-i", str(sahneler[1]), "-frames:v", "1",
                     "-vf", f"scale=-2:{H}:flags=lanczos,crop={W}:{H}", str(ky)], check=True)
     im = Image.open(ky).convert("RGBA")
-    im = Image.alpha_composite(im, Image.open(yazi_katmani(f"KABADAYI GİRSEYDİ #{b['no']}", 84, 1450, str(gecici / "kk.png"))))
+    im = Image.alpha_composite(im, Image.open(yazi_katmani(f"KABADAYI GİRSEYDİ #{b['no']}", 84, 1300, str(gecici / "kk.png"))))
+    im = Image.alpha_composite(im, Image.open(yazi_katmani(HANDLE, 46, 1530, str(gecici / "kh.png"), ALTIN, 5)))
     im.convert("RGB").save(kapak, quality=92)
     print("montaj tamam", cikti, TOPLAM, flush=True)
 
@@ -166,7 +185,8 @@ def calistir():
         b = next(x for x in tum if x["no"] == int(sys.argv[2]))
     else:
         biten = {k["no"] for k in yayinlanan() if k.get("reel_id")}
-        b = next((x for x in tum if x["durum"] in ("onayli", "uret") and x["no"] not in biten
+        sira = sorted(tum, key=lambda x: (x["durum"] != "onayli", x["no"]))   # önce onaylı bölüm
+        b = next((x for x in sira if x["durum"] in ("onayli", "uret") and x["no"] not in biten
                   and not (KOK / f"medya/kabadayi/{x['no']}.mp4").exists()), None)
         if not b:
             print("Uretilecek onayli bolum yok."); return

@@ -221,5 +221,113 @@
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
+  },
+  {
+    "tarih": "2026-11-11",
+    "no": 15,
+    "reel": [
+      ["İhanet seni\nbitirmez.\nGözünü açar.", "Gözünü", 2.6],
+      ["Kimse değersiz\nbir şeyi satmaz.", "değersiz", 2.4],
+      ["Beni satanı\nyıllarca\nsuçladım.", "suçladım.", 2.4],
+      ["Sonra anladım:\nbana yol\naçmış.", "yol", 2.4],
+      ["Kin tutma.\nDaha güçlü\nkalk.", "güçlü", 2.4]
+    ],
+    "reel_aciklama": "Beni satan adam, bana kim olduğumu gösterdi. 🎩\n\nSokak Dersi #15\nBunu sırtından vurulmuş birine gönder.\nYarın #16 — takip et, kaçırma.\n\n#ihanet #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": ""
+  },
+  {
+    "tarih": "2026-11-12",
+    "no": 16,
+    "reel": [
+      ["Yalnız kalman\nkaybettiğin\nanlamına gelmez.", "Yalnız", 2.6],
+      ["Kalabalık\nsadece ses\nyapar.", "ses", 2.2],
+      ["En zor yılımı\ntek başıma\ngeçirdim.", "tek", 2.6],
+      ["Kimse gelmedi.\nAma ben\ndurmadım.", "durmadım.", 2.4],
+      ["Bugün yalnızsan\nhazırlanıyorsun\ndemektir.", "hazırlanıyorsun", 2.6]
+    ],
+    "reel_aciklama": "En zor yılımı tek başıma geçirdim. O yıl beni ben yaptı. 🎩\n\nSokak Dersi #16\nBunu bugün yalnız hisseden birine gönder.\nYarın #17 — takip et, kaçırma.\n\n#yalnızlık #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": "",
+    "ses": true
+  },
+  {
+    "tarih": "2026-11-13",
+    "no": 17,
+    "reel": [
+      ["Sesini\nyükseltmene\ngerek yok.", "gerek", 2.4],
+      ["Haklı olan\nbağırmaz.", "bağırmaz.", 2.2],
+      ["Sokakta en çok\nsessiz adamdan\nçekinirlerdi.", "sessiz", 2.6],
+      ["Çünkü ne\ndüşündüğünü\nkimse bilmezdi.", "bilmezdi.", 2.6],
+      ["Az konuş.\nİşin konuşsun.", "İşin", 2.4]
+    ],
+    "reel_aciklama": "Sokakta en çok sessiz adamdan çekinirlerdi. 🎩\n\nSokak Dersi #17\nBunu az konuşup çok iş yapan birine gönder.\nYarın #18 — takip et, kaçırma.\n\n#sessizgüç #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": ""
+  },
+  {
+    "tarih": "2026-11-14",
+    "no": 18,
+    "reel": [
+      ["Geç kalmadın.\nSıran şimdi\ngeldi.", "Sıran", 2.6],
+      ["Herkesin saati\nayrı işler.", "saati", 2.2],
+      ["Ben kırk yaşında\nyeniden\nbaşladım.", "kırk", 2.6],
+      ["Erken başlayan\nçoğu adamı\ngeçtim.", "geçtim.", 2.4],
+      ["Yaşına bakma.\nAdımına bak.", "Adımına", 2.4]
+    ],
+    "reel_aciklama": "Kırk yaşında yeniden başladım. Kimse geç kaldığımı hatırlamıyor. 🎩\n\nSokak Dersi #18\nBunu \"artık çok geç\" diyen birine gönder.\nYarın #19 — takip et, kaçırma.\n\n#yenibaşlangıç #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": "",
+    "ses": true
+  },
+  {
+    "tarih": "2026-11-15",
+    "no": 19,
+    "reel": [
+      ["Sözünü tutuyorsan\nzaten zenginsin.", "zenginsin.", 2.6],
+      ["Para gider,\nad kalır.", "ad", 2.2],
+      ["Cebimde beş kuruş\nyokken bile...", "kuruş", 2.4],
+      ["...sözüme\nherkes güvendi.", "güvendi.", 2.4],
+      ["Sözün senin\nimzandır.", "imzandır.", 2.4]
+    ],
+    "reel_aciklama": "Cebimde beş kuruş yokken bile sözüme herkes güvendi. 🎩\n\nSokak Dersi #19\nBunu sözünün eri olan birine gönder.\nYarın #20 — takip et, kaçırma.\n\n#söz #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": ""
+  },
+  {
+    "tarih": "2026-11-16",
+    "no": 20,
+    "reel": [
+      ["Dürüst kalman\nsaflık değil.", "saflık", 2.4],
+      ["Kolay yolu\nherkes bilir.", "Kolay", 2.2],
+      ["Bana çok kez\nkirli para\nuzattılar.", "kirli", 2.6],
+      ["Almadım.\nBugün başım dik.", "dik.", 2.4],
+      ["Temiz kal.\nGeç kazanırsın,\nama kalıcı.", "Temiz", 2.6]
+    ],
+    "reel_aciklama": "Bana çok kez kirli para uzattılar. Almadım. Başım hâlâ dik. 🎩\n\nSokak Dersi #20\nBunu dürüst kaldığı için \"saf\" denen birine gönder.\nYarın #21 — takip et, kaçırma.\n\n#dürüstlük #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": "",
+    "ses": true
+  },
+  {
+    "tarih": "2026-11-17",
+    "no": 21,
+    "reel": [
+      ["Geçmişin\nseni\ntanımlamaz.", "tanımlamaz.", 2.6],
+      ["Ben yanlış\nyollarda\nyürüdüm.", "yanlış", 2.4],
+      ["Bedelini\nkuruşu kuruşuna\nödedim.", "Bedelini", 2.6],
+      ["Ama bugünüm\nbenim\nseçimim.", "seçimim.", 2.4],
+      ["Dünü bırak.\nBugünü kur.", "kur.", 2.4]
+    ],
+    "reel_aciklama": "Yanlış yollarda yürüdüm, bedelini ödedim. Bugünümü ben seçtim. 🎩\n\nSokak Dersi #21\nBunu geçmişiyle savaşan birine gönder.\nYarın #22 — takip et, kaçırma.\n\n#geçmiş #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": ""
   }
 ]
