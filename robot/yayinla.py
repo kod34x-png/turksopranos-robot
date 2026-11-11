@@ -23,7 +23,7 @@ sonuc.update(onceki)
 PARCA = os.environ.get("PARCA", "hepsi")  # gonderi | reel | hikaye | hepsi
 import datetime
 _saat = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
-_vakit = {"gonderi": "13:00", "reel": "20:30", "hikaye": "22:30"}
+_vakit = {"gonderi": "13:00", "reel": "16:30", "hikaye": "18:30"}
 yap = lambda ad: PARCA in ("hepsi", ad) or (PARCA == "vakit" and _saat >= _vakit[ad])
 
 def istek(method, url, params=None, data=None, headers=None):
