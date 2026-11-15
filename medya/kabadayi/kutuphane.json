@@ -29,12 +29,14 @@
  },
  {
   "dosya": "medya/kabadayi/3/kare3.png",
+  "kapak": true,
   "tur": "kare",
   "karakter": true,
   "not": "kapıda siluet, durağan"
  },
  {
   "dosya": "medya/kabadayi/3/kare4.png",
+  "kapak": true,
   "tur": "kare",
   "karakter": true,
   "not": "ayakta, yüz, durağan"
@@ -63,6 +65,7 @@
  },
  {
   "dosya": "medya/kabadayi/kutuphane/k001.png",
+  "kapak": true,
   "tur": "kare",
   "karakter": true,
   "istem_no": 1,

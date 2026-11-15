@@ -4,7 +4,7 @@ Kullanım: python robot/uret.py <gün_json_dosyası> <çıktı_klasörü>
 import json, math, os, subprocess, sys, wave
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import ImageOps, Image, ImageDraw, ImageFont, ImageFilter
 
 BURASI = os.path.dirname(os.path.abspath(__file__))
 SANS = os.path.join(BURASI, "DejaVuSans-Bold.ttf")
@@ -200,12 +200,35 @@ def muzik(sure, satir_baslari, yol, secim, SR=44100):
         w.writeframes(st.tobytes())
 
 # ------------------------------------------------------------------ kapak (profil ızgarası için)
+def kapak_karesi():
+    """Kütüphanede "kapak": true işaretli kabadayı karelerinden günün numarasına göre biri; yoksa None."""
+    try:
+        kok = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        lst = [os.path.join(kok, x["dosya"]) for x in json.load(open(os.path.join(kok, "medya/kabadayi/kutuphane.json"), encoding="utf-8"))
+               if x.get("kapak") and x.get("tur") == "kare" and not x.get("kapali")]
+        lst = [p for p in lst if os.path.exists(p)]
+        return lst[int(gun["no"]) % len(lst)] if lst else None
+    except Exception as h:
+        print("Kapak karesi seçilemedi, düz kapak:", h); return None
+
 def kapak():
     """1080x1920 kapak. Yazı, profil ızgarasının kırptığı orta 1080x1350 alanda kalır."""
     W, H = 1080, 1920
-    bg, noise = arka_plan(W, H, seed=5)
-    im = Image.fromarray(np.clip(bg(0) + noise[0], 0, 255).astype(np.uint8)).convert("RGBA")
     ust, alt = (H - 1350) // 2, (H + 1350) // 2           # 285 .. 1635
+    kare = kapak_karesi()
+    if kare:                                               # kabadayı karesi arkada, yazı altta okunur
+        im = ImageOps.fit(Image.open(kare).convert("RGB"), (W, H), Image.LANCZOS, centering=(0.5, 0.35)).convert("RGBA")
+        a = np.zeros((H, W), np.uint8)
+        for y in range(H):
+            a[y] = int(40 + 190 * max(0, min(1, (y - H * 0.46) / (H * 0.14))))
+        a[ust + 110: ust + 280] = np.maximum(a[ust + 110: ust + 280], 110)   # başlık şeridi
+        golge = Image.new("RGBA", (W, H), (0, 0, 0, 0)); golge.putalpha(Image.fromarray(a))
+        im = Image.alpha_composite(im, golge)
+        y_metin = H * 0.66
+    else:
+        bg, noise = arka_plan(W, H, seed=5)
+        im = Image.fromarray(np.clip(bg(0) + noise[0], 0, 255).astype(np.uint8)).convert("RGBA")
+        y_metin = H * 0.52
     d = ImageDraw.Draw(im)
     d.rectangle((70, ust + 70, W - 70, alt - 70), outline=GOLD + (170,), width=4)
     etiket_f = ImageFont.truetype(SANS, 64)
@@ -215,7 +238,10 @@ def kapak():
     metin, vurgu, _ = gun["reel"][0]
     en_uzun = max(len(s) for s in metin.split("\n"))
     boyut = 132 if en_uzun <= 12 else 112 if en_uzun <= 15 else 96 if en_uzun <= 18 else 82
-    im = Image.alpha_composite(im, yazi_katmani(W, H, metin, vurgu, boyut, y_merkez=H * 0.52))
+    if kare:                                               # fotoğraflı kapakta yazı çerçeveye ve imzaya taşmasın
+        boyut = int(boyut * 0.86)
+        y_metin = min(y_metin, alt - 250 - len(metin.split("\n")) * boyut * 0.62)
+    im = Image.alpha_composite(im, yazi_katmani(W, H, metin, vurgu, boyut, y_merkez=y_metin))
     d = ImageDraw.Draw(im)
     hf = ImageFont.truetype(SANS, 40)
     d.text(((W - d.textlength(HANDLE, font=hf)) / 2, alt - 190), HANDLE, font=hf, fill=(220, 210, 190, 210))
