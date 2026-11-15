@@ -2,6 +2,7 @@
 Kullanım: python robot/uret.py <gün_json_dosyası> <çıktı_klasörü>
 """
 import json, math, os, subprocess, sys, wave
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
@@ -263,6 +264,11 @@ def reel():
     if sesli:
         ses_yol = ses_uret(satirlar[0][0].replace("\n", " ").replace("...", "").strip(), os.path.join(OUT, "ses.mp3"))
         sesli = ses_yol is not None
+        if sesli:                                   # TTS başındaki sessizliği kırp (konuşma ≤0,2 sn'de başlasın)
+            kirpik = os.path.join(OUT, "ses_kirpik.wav")
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", ses_yol, "-af",
+                            "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02", kirpik], check=True)
+            ses_yol = kirpik
         if sesli:                                   # ses ilk satır bitmeden bitsin
             satirlar[0][2] = max(satirlar[0][2], SES_BASLA + ses_suresi(ses_yol) + 0.35)
             print("Sesli Reel, ilk satır", round(satirlar[0][2], 2), "sn")
@@ -320,6 +326,8 @@ def reel():
         p.stdin.write(im.convert("RGB").tobytes())
     p.stdin.close(); p.wait()
     os.remove(wav)
+    gecici = os.path.join(OUT, "reel_ham.mp4"); os.replace(mp4, gecici)
+    loudnorm_iki_gecis(gecici, mp4, video_kopya=True); os.remove(gecici)     # her Reel -14 LUFS
     return mp4
 
 # ------------------------------------------------------------------ kart
@@ -346,7 +354,173 @@ def kart():
     im.convert("RGB").save(yol, quality=92)
     return yol
 
+# ------------------------------------------------------------------ harman (15 Kasım 2026 kararı)
+# Sokak Dersi metni + Kabadayı karakterinin kütüphanedeki klip/kareleri + baştan sona sesli anlatım.
+# Ses: fr-FR-RemyMultilingualNeural (Özgür'ün seçimi). Konuşma 0,15 sn'de başlar, satır arası 0,32 sn,
+# son karışım -14 LUFS. Tek numaralı Reel'lerde ASMR katmanı (gün aşırı test).
+# Ses seçenekleri: (edge-tts sesi, hız, perde, kalınlaştırma oranı). Remy, ü/ç'li kelimeleri bozduğu için
+# (15 Kasım ASR testi: "Vazgeçmek küçültür" -> "Vazgekmek kukulter") Özgür yeniden seçene kadar Ahmet (tok) kullanılır.
+SESLER = {"remy": ("fr-FR-RemyMultilingualNeural", "-5%", "+0Hz", 0.95),
+          "ahmet": ("tr-TR-AhmetNeural", "+0%", "-6Hz", 0.90)}
+HARMAN_SES_ADI = os.environ.get("HARMAN_SES") or "ahmet"
+HARMAN_SES, HARMAN_ORAN, HARMAN_PITCH, HARMAN_KALIN = SESLER[HARMAN_SES_ADI]
+KOK = os.path.dirname(BURASI)
+
+def _komut(*a):
+    subprocess.run(list(a), check=True)
+
+def harman_satir_sesi(metin, yol_ham, yol):
+    import asyncio, edge_tts
+    for deneme in range(4):                          # edge-tts ara sıra boş döner: tekrar dene
+        try:
+            asyncio.run(edge_tts.Communicate(metin, HARMAN_SES, rate=HARMAN_ORAN, pitch=HARMAN_PITCH).save(yol_ham))
+            break
+        except Exception as e:
+            if deneme == 3:
+                raise
+            print("TTS tekrar:", repr(e)[:120]); import time; time.sleep(3 * (deneme + 1))
+    kirp = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02"
+    zincir = (f"aresample=44100,{kirp},areverse,{kirp},areverse,asetrate=44100*{HARMAN_KALIN},aresample=44100,atempo={1 / HARMAN_KALIN:.4f},"
+              "highpass=f=60,equalizer=f=120:t=q:w=1:g=4,equalizer=f=350:t=q:w=1.2:g=-3,equalizer=f=2800:t=q:w=1.5:g=2.5,"
+              "lowpass=f=9000,acompressor=threshold=-20dB:ratio=3.5:attack=8:release=120:makeup=2,aformat=channel_layouts=stereo")
+    _komut("ffmpeg", "-y", "-v", "error", "-i", yol_ham, "-af", zincir, "-ar", "44100", yol)
+    return ses_suresi(yol)
+
+def loudnorm_iki_gecis(giris, cikis, video_kopya=False):
+    import re as _re
+    t = subprocess.run(["ffmpeg", "-hide_banner", "-i", giris, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
+                        "-f", "null", "-"], capture_output=True, text=True).stderr
+    j = json.loads(t[t.rindex("{"):])
+    af = (f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:"
+          f"measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:linear=true")
+    v = ["-c:v", "copy"] if video_kopya else []
+    _komut("ffmpeg", "-y", "-v", "error", "-i", giris, *v, "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "44100",
+           "-movflags", "+faststart", cikis)
+
+def kutuphane_sec(adet, no):
+    yol = os.path.join(KOK, "medya/kabadayi/kutuphane.json")
+    lst = [x for x in json.load(open(yol, encoding="utf-8")) if os.path.exists(os.path.join(KOK, x["dosya"]))
+           and not x.get("kapali")]
+    if len(lst) < 3:
+        return None
+    rng = np.random.default_rng(int(no) * 7919)
+    sira = list(rng.permutation(len(lst)))
+    kar = [lst[i] for i in sira if lst[i].get("karakter")]
+    diger = [lst[i] for i in sira if not lst[i].get("karakter")]
+    secim = (kar[:2] + diger[:1] + kar[2:] + diger[1:])          # ilk iki kesme mutlaka kabadayı
+    while len(secim) < adet:
+        secim += secim
+    secim = secim[:adet]
+    for i in range(1, len(secim)):                   # aynı dosya art arda gelmesin
+        if secim[i]["dosya"] == secim[i - 1]["dosya"]:
+            j = next((j for j in range(i + 1, len(secim)) if secim[j]["dosya"] != secim[i - 1]["dosya"]), None)
+            if j: secim[i], secim[j] = secim[j], secim[i]
+    return secim
+
+def reel_harman():
+    W, H = 1080, 1920
+    satirlar = [s for s in gun["reel"]]
+    tmp = os.path.join(OUT, "harman"); os.makedirs(tmp, exist_ok=True)
+    # 1) ses: satır satır, sessizlikleri kırpılmış, aralarda 0,32 sn
+    import wave as _w
+    parcalar, zam, t = [], [], 0.15
+    for i, (metin, _, _) in enumerate(satirlar):
+        p = os.path.join(tmp, f"s{i}.wav")
+        d = harman_satir_sesi(metin.replace("\n", " ").replace("...", "").strip(), os.path.join(tmp, f"s{i}.mp3"), p)
+        parcalar.append(p); zam.append((t, t + d)); t += d + 0.32
+    govde = zam[-1][1] + 0.45; KART = 2.4; TOP = round(govde + KART, 2)
+    liste = os.path.join(tmp, "liste.txt")
+    sessiz = os.path.join(tmp, "bos.wav")
+    _komut("ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-t", "0.32", sessiz)
+    with open(liste, "w") as f:
+        for i, p in enumerate(parcalar):
+            f.write(f"file '{p}'\n"); f.write(f"file '{sessiz}'\n")
+    ses = os.path.join(tmp, "ses.wav")
+    _komut("ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", liste, "-af", "adelay=150|150,apad",
+           "-t", str(TOP), "-ar", "44100", ses)
+    # 2) kesmeler: her satır bir kesme
+    kes = [0.0] + [z[0] - 0.12 for z in zam[1:]]
+    son = kes[1:] + [govde]
+    secim = kutuphane_sec(len(satirlar), gun["no"])
+    # 3) yazı katmanları
+    def gradyan():
+        a = np.zeros((H, W), np.uint8)
+        for y in range(H):
+            a[y] = int(150 * max(0, min(1, (y - H * 0.40) / (H * 0.25))))
+        g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); g.putalpha(Image.fromarray(a)); return g
+    G = gradyan(); seri = ImageFont.truetype(SANS, 34); hf = ImageFont.truetype(SANS, 38)
+    yazilar = []
+    for i, (metin, vurgu, _) in enumerate(satirlar):
+        im = Image.alpha_composite(G, yazi_katmani(W, H, metin, vurgu, boyut_sec(metin, W), SERIF, y_merkez=H * 0.62))
+        d = ImageDraw.Draw(im); e = f"SOKAK DERSİ #{gun['no']}"
+        d.text(((W - d.textlength(e, font=seri)) / 2, 230), e, font=seri, fill=GOLD + (220,), stroke_width=3, stroke_fill=(0, 0, 0, 180))
+        d.text(((W - d.textlength(HANDLE, font=hf)) / 2, H - 300), HANDLE, font=hf, fill=(220, 210, 190, 170))
+        yp = os.path.join(tmp, f"y{i}.png"); im.save(yp); yazilar.append(yp)
+    kapanis = Image.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, 200)), Image.alpha_composite(
+        yazi_katmani(W, H, f"Yarın\nSokak Dersi #{gun['no'] + 1}", "Yarın", 104, SERIF, y_merkez=H * 0.45),
+        yazi_katmani(W, H, "Takip et, kaçırma.", "Takip", 72, SERIF, y_merkez=H * 0.60)))
+    kp = os.path.join(tmp, "son.png"); kapanis.save(kp)
+    # 4) müzik + ASMR
+    secim_m = muzik_secimi(gun["tarih"], gun["no"])
+    mz = os.path.join(tmp, "muzik.wav"); muzik(TOP, kes, mz, secim_m)
+    asmr_acik = bool(gun.get("asmr", int(gun["no"]) % 2 == 1))
+    amb = os.path.join(tmp, "amb.wav")
+    if asmr_acik:
+        import asmr
+        olay = [("cakmak", 0.0)]
+        if len(zam) > 2: olay.append(("bardak", zam[1][1] + 0.05))
+        olay.append(("tespih", zam[-1][1] + 0.1))
+        x = asmr.katman(TOP, olay, tohum=int(gun["no"]))
+    else:
+        x = np.zeros(int(TOP * 44100))
+    with wave.open(amb, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(44100)
+        w.writeframes((np.clip(x, -1, 1) * 32767).astype("<i2").tobytes())
+    # 5) montaj
+    gir, fc = [], ""
+    for i, k in enumerate(secim):
+        d = son[i] - kes[i] + (KART if i == len(secim) - 1 else 0)
+        dosya = os.path.join(KOK, k["dosya"])
+        if k["tur"] == "kare":
+            png = os.path.join(tmp, f"k{i}.png"); Image.open(dosya).convert("RGB").save(png)
+            gir += ["-loop", "1", "-t", f"{d + 0.5:.2f}", "-i", png]; hiz = ""
+        else:
+            gir += ["-ss", str(k.get("bas", 0.3)), "-i", dosya]; hiz = "setpts=0.8*PTS,"
+        ayna = "hflip," if k.get("ayna") else ""
+        nf = max(1, int(d * 30))
+        fc += (f"[{i}:v]{hiz}fps=30,scale=-2:1920:flags=lanczos,crop=1080:1920,{ayna}"
+               f"zoompan=z='1.08-0.08*on/{nf}':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,"
+               f"tpad=stop_mode=clone:stop_duration=8,trim=duration={d:.2f},setpts=PTS-STARTPTS,"
+               f"eq=contrast=1.08:saturation=0.85,setsar=1[c{i}];")
+    n = len(secim)
+    fc += "".join(f"[c{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=0[b0];"; cur = "b0"
+    for i, yp in enumerate(yazilar):
+        gir += ["-i", yp]; fc += f"[{cur}][{n}:v]overlay=enable='between(t,{kes[i]:.2f},{son[i]:.2f})'[o{i}];"; cur = f"o{i}"; n += 1
+    gir += ["-i", kp]; fc += f"[{cur}][{n}:v]overlay=enable='gte(t,{govde:.2f})',format=yuv420p[v];"; n += 1
+    gir += ["-i", ses, "-i", mz, "-i", amb]; sv, mi, ai = n, n + 1, n + 2
+    fc += (f"[{sv}:a]aformat=channel_layouts=stereo,asplit=2[se][ka];[{mi}:a]aformat=channel_layouts=stereo,volume=0.55[mu];"
+           f"[mu][ka]sidechaincompress=threshold=0.03:ratio=8:attack=5:release=300[md];[{ai}:a]aformat=channel_layouts=stereo[am];"
+           f"[md][se][am]amix=inputs=3:duration=first:normalize=0,afade=t=out:st={TOP - 0.8:.2f}:d=0.8,alimiter=limit=0.9[a]")
+    ham = os.path.join(tmp, "ham.mkv")
+    _komut("ffmpeg", "-y", "-v", "error", *gir, "-filter_complex", fc, "-map", "[v]", "-map", "[a]", "-t", str(TOP),
+           "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p", "-profile:v", "high",
+           "-c:a", "pcm_s16le", ham)
+    mp4 = os.path.join(OUT, "reel.mp4"); loudnorm_iki_gecis(ham, mp4, video_kopya=True)
+    json.dump({"bicim": "harman", "ses": HARMAN_SES, "asmr": asmr_acik, "sure": TOP,
+               "klipler": [k["dosya"] + (" (ayna)" if k.get("ayna") else "") for k in secim]},
+              open(os.path.join(OUT, "meta.json"), "w"), ensure_ascii=False, indent=1)
+    print("Harman Reel:", TOP, "sn, ASMR:", asmr_acik)
+    return mp4
+
 if __name__ == "__main__":
     print(kart())
     print(kapak())
-    print(reel())
+    if gun.get("bicim", "harman") == "harman":
+        try:
+            print(reel_harman())
+        except Exception as e:                       # harman üretilemezse eski yazılı biçim çıkar, yayın durmaz
+            print("HARMAN ÜRETİLEMEDİ, yazılı biçime dönülüyor:", repr(e)[:300])
+            json.dump({"bicim": "yazili", "hata": repr(e)[:300]}, open(os.path.join(OUT, "meta.json"), "w"), ensure_ascii=False)
+            print(reel())
+    else:
+        print(reel())

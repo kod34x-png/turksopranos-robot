@@ -23,7 +23,7 @@ sonuc.update(onceki)
 PARCA = os.environ.get("PARCA", "hepsi")  # gonderi | reel | hikaye | hepsi
 import datetime
 _saat = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
-_vakit = {"gonderi": "13:00", "reel": "16:30", "hikaye": "18:30"}
+_vakit = {"gonderi": "13:00", "reel": "20:30", "hikaye": "22:30"}   # 15 Kasım 2026 kararı
 yap = lambda ad: PARCA in ("hepsi", ad) or (PARCA == "vakit" and _saat >= _vakit[ad])
 
 def istek(method, url, params=None, data=None, headers=None):
@@ -55,6 +55,24 @@ def bekle(cid, ad):
         time.sleep(10)
     raise RuntimeError(f"{ad} zaman aşımı")
 
+# Yapay zekâ etiketi (15 Kasım 2026): harman Reel'ler kabadayı görüntüsü içerdiği için "AI info" etiketi gönderilir.
+# Parametre reddedilirse etiketsiz tekrar denenir (yayın durmaz) ve sonuç sonuc.json'a yazılır.
+_meta = f"medya/{gun['tarih']}-meta.json"
+AI_ETIKET = (json.load(open(_meta, encoding="utf-8")).get("bicim") if os.path.exists(_meta) else gun.get("bicim", "harman")) == "harman"
+
+def _yukle(params):
+    try:
+        kap = istek("POST", f"{API}/{IG}/media", params)
+        bekle(kap["id"], params["media_type"])
+    except RuntimeError as e:
+        if "cover_url" not in params:
+            raise
+        print("Kapak kabul edilmedi, kapaksız deneniyor:", str(e)[:200])   # Reel yine de çıksın
+        params = {k: v for k, v in params.items() if k != "cover_url"}
+        kap = istek("POST", f"{API}/{IG}/media", params)
+        bekle(kap["id"], params["media_type"])
+    return istek("POST", f"{API}/{IG}/media_publish", {"creation_id": kap["id"]})["id"]
+
 def video_yukle(media_type, caption=None):
     params = {"media_type": media_type, "video_url": VIDEO_URL}
     if caption:
@@ -63,23 +81,25 @@ def video_yukle(media_type, caption=None):
         params["share_to_feed"] = "true"
         if KAPAK_URL:
             params["cover_url"] = KAPAK_URL
-    try:
-        kap = istek("POST", f"{API}/{IG}/media", params)
-        bekle(kap["id"], media_type)
-    except RuntimeError as e:
-        if "cover_url" not in params:
-            raise
-        print("Kapak kabul edilmedi, kapaksız deneniyor:", str(e)[:200])   # Reel yine de çıksın
-        params.pop("cover_url")
-        kap = istek("POST", f"{API}/{IG}/media", params)
-        bekle(kap["id"], media_type)
-    return istek("POST", f"{API}/{IG}/media_publish", {"creation_id": kap["id"]})["id"]
+        if AI_ETIKET:
+            try:
+                r = _yukle(dict(params, is_ai_generated="true"))
+                sonuc["ai_etiket"] = "gonderildi"; return r
+            except RuntimeError as e:
+                print("AI etiketiyle olmadı, etiketsiz deneniyor:", str(e)[:200])
+                sonuc["ai_etiket"] = "reddedildi: " + str(e)[:150]
+    return _yukle(params)
 
 # 1) Reel
 if yap("reel") and "reel_id" not in sonuc:
   try:
     sonuc["reel_id"] = video_yukle("REELS", gun["reel_aciklama"])
     print("Reel yayınlandı")
+    if sonuc.get("ai_etiket") == "gonderildi":         # etiket gerçekten kondu mu? (alan adı okunamazsa not düşülür)
+        try:
+            sonuc["ai_etiket_kontrol"] = istek("GET", f"{API}/{sonuc['reel_id']}", {"fields": "is_ai_generated"}).get("is_ai_generated", "alan yok")
+        except Exception as e:
+            sonuc["ai_etiket_kontrol"] = "okunamadi: " + str(e)[:120]
   except Exception as e:
     sonuc["reel_hata"] = str(e)[:500]; print("Reel HATA:", sonuc["reel_hata"])
 

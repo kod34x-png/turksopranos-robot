@@ -1,0 +1,64 @@
+[
+ {
+  "dosya": "medya/kabadayi/3/sahne3.mp4",
+  "tur": "klip",
+  "bas": 0.3,
+  "karakter": true,
+  "not": "kapıda siluet (KG #3)"
+ },
+ {
+  "dosya": "medya/kabadayi/3/sahne4.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "not": "masada ayakta, yüz gölgede (KG #3)"
+ },
+ {
+  "dosya": "medya/kabadayi/3/sahne5.mp4",
+  "tur": "klip",
+  "bas": 0.3,
+  "karakter": true,
+  "not": "yüzüklü el, dosya (KG #3)"
+ },
+ {
+  "dosya": "medya/kabadayi/3/sahne1.mp4",
+  "tur": "klip",
+  "bas": 0.3,
+  "karakter": false,
+  "not": "yaşlı adam para sayıyor (KG #3)"
+ },
+ {
+  "dosya": "medya/kabadayi/3/kare3.png",
+  "tur": "kare",
+  "karakter": true,
+  "not": "kapıda siluet, durağan"
+ },
+ {
+  "dosya": "medya/kabadayi/3/kare4.png",
+  "tur": "kare",
+  "karakter": true,
+  "not": "ayakta, yüz, durağan"
+ },
+ {
+  "dosya": "medya/kabadayi/3/kare5.png",
+  "tur": "kare",
+  "karakter": true,
+  "not": "el, durağan"
+ },
+ {
+  "dosya": "medya/kabadayi/3/sahne4.mp4",
+  "tur": "klip",
+  "bas": 2.2,
+  "karakter": true,
+  "ayna": true,
+  "not": "sahne4 aynalı, ikinci yarı"
+ },
+ {
+  "dosya": "medya/kabadayi/3/sahne3.mp4",
+  "tur": "klip",
+  "bas": 1.8,
+  "karakter": true,
+  "ayna": true,
+  "not": "sahne3 aynalı, ikinci yarı"
+ }
+]

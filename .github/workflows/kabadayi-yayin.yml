@@ -1,8 +1,7 @@
 name: Kabadayi Yayin
 # Cumartesi 13:00 (Turkiye). Zamanlayici gecikebildigi icin 16:30'a kadar 30 dakikada bir uyanir; ayni gun tek paylasim yapar.
+# 15 Kasım 2026: Kabadayı Girseydi haftalık serisi harmanın içinde eridi; zamanlayıcı kapalı, elle çalıştırılabilir.
 on:
-  schedule:
-    - cron: "0,30 10-13 * * 6"
   workflow_dispatch:
 permissions:
   contents: write

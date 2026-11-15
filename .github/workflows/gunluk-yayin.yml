@@ -1,12 +1,12 @@
 name: Gunluk Yayin
 
-# Türkiye saatiyle: 16:30 Reel, 18:30 hikâye (kart gönderisi 31 Ekim 2026'dan beri kapalı).
+# Türkiye saatiyle: 20:30 Reel, 22:30 hikâye (15 Kasım 2026 kararı; kart gönderisi 31 Ekim'den beri kapalı).
 # GitHub zamanlayıcısı saatlerce gecikebildiği/atlayabildiği için robot
-# 16:00-19:30 arası her 30 dakikada uyanır; vakti gelmiş ve henüz atılmamış
+# 20:00-23:30 arası her 30 dakikada uyanır; vakti gelmiş ve henüz atılmamış
 # ne varsa onu atar (çift paylaşım yapmaz).
 on:
   schedule:
-    - cron: "0,30 13-16 * * *"
+    - cron: "0,30 17-20 * * *"
   workflow_dispatch:
     inputs:
       parca:
@@ -52,7 +52,7 @@ jobs:
               if k.get("tarih") == bugun:
                   kayit.update({a: v for a, v in k.items() if a.endswith("_id")})
           simdi = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%H:%M")
-          vakitli = [a for a, s in (("reel_id", "16:30"), ("hikaye_id", "18:30")) if simdi >= s]
+          vakitli = [a for a, s in (("reel_id", "20:30"), ("hikaye_id", "22:30")) if simdi >= s]
           gerekli = {"gonderi": ["gonderi_id"], "reel": ["reel_id"], "hikaye": ["hikaye_id"],
                      "hepsi": ["reel_id", "hikaye_id"], "vakit": vakitli}[os.environ["PARCA"]]
           print("Saat", simdi, "gerekli:", gerekli)
@@ -91,6 +91,7 @@ jobs:
           cp cikti/kart.jpg medya/$T-kart.jpg
           cp cikti/reel.mp4 medya/$T-reel.mp4
           cp cikti/kapak.jpg medya/$T-kapak.jpg
+          if [ -f cikti/meta.json ]; then cp cikti/meta.json medya/$T-meta.json; fi
           git config user.name "turksopranos-robot"
           git config user.email "robot@users.noreply.github.com"
           git add medya/ && git commit -qm "Medya $T" && git pull -q --rebase && git push -q
@@ -106,6 +107,15 @@ jobs:
           B="https://raw.githubusercontent.com/${{ github.repository }}/main/medya"
           mkdir -p cikti
           python3 robot/yayinla.py gun.json cikti "$B/$T-kart.jpg" "$B/$T-reel.mp4" "$B/$T-kapak.jpg"
+
+      - name: YouTube Shorts'a da yükle (anahtarlar kasada varsa)
+        if: steps.sec.outputs.var == 'evet'
+        continue-on-error: true
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python3 robot/youtube_yukle.py gun.json medya/${{ steps.sec.outputs.tarih }}-reel.mp4 cikti
 
       - name: Sonucu kaydet
         if: always() && steps.sec.outputs.var == 'evet'

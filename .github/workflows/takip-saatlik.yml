@@ -1,0 +1,26 @@
+name: Takip Olcer
+# 15 Kasım 2026: her Reel'den sonraki saatlerde takipçi sayısını saat başı kaydeder (20:15–03:15 TR).
+on:
+  schedule:
+    - cron: "15 17-23,0 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: takip-olcer
+jobs:
+  olc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ölç
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: python3 robot/takip.py
+      - name: Depoya yaz
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add durum/takip_saatlik.json && git commit -qm "Takip olcumu" || exit 0
+          for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 5; done
