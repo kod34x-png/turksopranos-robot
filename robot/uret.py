@@ -390,7 +390,7 @@ def loudnorm_iki_gecis(giris, cikis, video_kopya=False):
     import re as _re
     t = subprocess.run(["ffmpeg", "-hide_banner", "-i", giris, "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
                         "-f", "null", "-"], capture_output=True, text=True).stderr
-    j = json.loads(t[t.rindex("{"):])
+    j = json.loads(t[t.rindex("{"):t.rindex("}") + 1])
     af = (f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:"
           f"measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:linear=true")
     v = ["-c:v", "copy"] if video_kopya else []
@@ -434,7 +434,7 @@ def reel_harman():
     _komut("ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-t", "0.32", sessiz)
     with open(liste, "w") as f:
         for i, p in enumerate(parcalar):
-            f.write(f"file '{p}'\n"); f.write(f"file '{sessiz}'\n")
+            f.write(f"file '{os.path.abspath(p)}'\n"); f.write(f"file '{os.path.abspath(sessiz)}'\n")
     ses = os.path.join(tmp, "ses.wav")
     _komut("ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", liste, "-af", "adelay=150|150,apad",
            "-t", str(TOP), "-ar", "44100", ses)
