@@ -60,5 +60,12 @@
   "karakter": true,
   "ayna": true,
   "not": "sahne3 aynalı, ikinci yarı"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k001.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 1,
+  "not": "nding on the Galata bridge at dawn among fishermen's rods, looking at the water."
  }
 ]
