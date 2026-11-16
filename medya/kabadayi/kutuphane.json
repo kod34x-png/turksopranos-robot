@@ -70,5 +70,20 @@
   "karakter": true,
   "istem_no": 1,
   "not": "nding on the Galata bridge at dawn among fishermen's rods, looking at the water."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k002.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 2,
+  "not": " an old Istanbul tea house holding a small tulip-shaped tea glass, steam rising."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k002.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 2,
+  "not": "klip: steam rises from the tea glass, he lifts it slowly, slow pus"
  }
 ]
