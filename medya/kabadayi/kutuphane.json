@@ -85,5 +85,20 @@
   "karakter": true,
   "istem_no_klip": 2,
   "not": "klip: steam rises from the tea glass, he lifts it slowly, slow pus"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k003.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 3,
+  "not": "own a rainy narrow Istanbul street at night, wet cobblestones, warm street lamp."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k003.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 3,
+  "not": "klip: he walks slowly toward camera, rain falls, reflections shimm"
  }
 ]

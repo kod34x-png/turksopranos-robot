@@ -4,3 +4,6 @@ klip durdu: AppError('You have exceeded your ZeroGPU runs limit. Subscribe to Hu
 kare 2 tamam
 kare durdu: AppError('You have exceeded your free ZeroGPU quota (60s requested vs. 89s left). Try again in 4:08:38. Subscribe to Hugging Face PRO to get 25 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU')
 klip 2 tamam
+kare 3 tamam
+kare durdu: AppError('You have exceeded your free ZeroGPU quota (60s requested vs. 86s left). Try again in 3:53:54. Subscribe to Hugging Face PRO to get 25 min of ZeroGPU quota a day - https://huggingface.co/subscribe/pro?from=ZeroGPU')
+klip 3 tamam
