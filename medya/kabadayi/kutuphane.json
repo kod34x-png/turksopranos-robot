@@ -100,5 +100,27 @@
   "karakter": true,
   "istem_no_klip": 3,
   "not": "klip: he walks slowly toward camera, rain falls, reflections shimm"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k004.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 4,
+  "not": "dow of an old apartment, looking out at the Bosphorus at dusk, seen from behind."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k005.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 5,
+  "not": "lf in shadow, sitting on a stone bench in a quiet old courtyard feeding pigeons."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k004.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 4,
+  "not": "klip: curtains move slightly, ships pass far away, very slow push-"
  }
 ]
