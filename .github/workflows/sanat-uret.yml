@@ -1,0 +1,27 @@
+name: Sanat Uret
+# 20 Kasım 2026: tek seferlik sürrealist tablo üretimi (urfaliozgurkamaci). Sadece elle tetiklenir, paylaşım yapmaz.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  uret:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q gradio_client
+      - name: Uret
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python sanat/uret.py
+      - name: Depoya koy
+        if: always()
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add sanat && git commit -qm "Sanat uretimi" || exit 0
+          for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 5; done
