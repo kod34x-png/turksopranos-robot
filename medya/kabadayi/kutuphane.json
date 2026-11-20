@@ -122,5 +122,12 @@
   "karakter": true,
   "istem_no_klip": 4,
   "not": "klip: curtains move slightly, ships pass far away, very slow push-"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k006.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 6,
+  "not": "se-up of his weathered hands slowly turning dark prayer beads on a wooden table."
  }
 ]
