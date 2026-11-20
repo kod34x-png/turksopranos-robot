@@ -386,16 +386,15 @@
   {
     "tarih": "2026-11-21",
     "no": 25,
-    "bicim": "harman",
+    "bicim": "hazir_video",
     "ses": true,
+    "not": "FON/DİP — Özgür'ün onayıyla elle hazırlandı (medya/2026-11-21-reel.mp4). Robot yeniden üretmesin, gündem akışı bu günü değiştirmesin.",
     "reel": [
-      ["Paranı\ngösterme,\nbiriktir.", "biriktir.", 2.4],
-      ["Ben kazandığımı\nherkese\ngösterdim.", "gösterdim.", 2.4],
-      ["Kötü gün geldi,\nkimse\ntanımadı.", "tanımadı.", 2.4],
-      ["Cebin dolu\nolsun,\nağzın kapalı.", "kapalı.", 2.4],
-      ["Gösteren\nçabuk biter.", "biter.", 2.4]
+      ["Fon.\nDip.", "Dip.", 2.4],
+      ["Yiyemeyeceğiniz malı\nbiriktirip,", "biriktirip,", 2.4],
+      ["diğerlerine\nbırakmadınız.", "bırakmadınız.", 2.4]
     ],
-    "reel_aciklama": "Kazandığımı herkese gösterdim. Kötü gün gelince kimse tanımadı. 🎩\n\nSokak Dersi #25\nBunu sessizce biriktiren birine gönder.\nYarın #26 — takip et, kaçırma.\n\n#para #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Yiyemeyeceğiniz malı biriktirip, diğerlerine bırakmadınız. 🎩\n\nSokak Dersi #25\nBunu dipte kalan birine gönder.\nYarın #26 — takip et, kaçırma.\n\n#fondip #israf #emekli #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
@@ -406,13 +405,13 @@
     "bicim": "harman",
     "ses": true,
     "reel": [
-      ["Annenin\nsesini duymak\nhâlâ mümkünse...", "mümkünse...", 2.4],
-      ["Ben aramayı\nhep erteledim.", "erteledim.", 2.4],
-      ["Bir gün\ntelefon\ncevap vermedi.", "cevap", 2.4],
-      ["Bugün ara.\nİki dakika.", "ara.", 2.4],
-      ["Gururunu\nsonra taşırsın.", "sonra", 2.4]
+      ["Paranı\ngösterme,\nbiriktir.", "biriktir.", 2.4],
+      ["Ben kazandığımı\nherkese\ngösterdim.", "gösterdim.", 2.4],
+      ["Kötü gün geldi,\nkimse\ntanımadı.", "tanımadı.", 2.4],
+      ["Cebin dolu\nolsun,\nağzın kapalı.", "kapalı.", 2.4],
+      ["Gösteren\nçabuk biter.", "biter.", 2.4]
     ],
-    "reel_aciklama": "Aramayı hep erteledim. Bir gün telefon cevap vermedi. 🎩\n\nSokak Dersi #26\nBunu annesini bugün arayacak birine gönder.\nYarın #27 — takip et, kaçırma.\n\n#anne #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Kazandığımı herkese gösterdim. Kötü gün gelince kimse tanımadı. 🎩\n\nSokak Dersi #26\nBunu sessizce biriktiren birine gönder.\nYarın #27 — takip et, kaçırma.\n\n#para #sokakdersi #hayatdersleri #motivasyon #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
@@ -423,13 +422,13 @@
     "bicim": "harman",
     "ses": true,
     "reel": [
-      ["Kimse\nalkışlamıyorsa\nyine çalış.", "çalış.", 2.4],
-      ["Ben alkış\nbekledim,\nvakit kaybettim.", "kaybettim.", 2.4],
-      ["Alkış\ngeç gelir.", "geç", 2.4],
-      ["Ama emek\nhiç unutmaz.", "emek", 2.4],
-      ["Sus.\nÇalış.\nBekle.", "Bekle.", 2.4]
+      ["Annenin\nsesini duymak\nhâlâ mümkünse...", "mümkünse...", 2.4],
+      ["Ben aramayı\nhep erteledim.", "erteledim.", 2.4],
+      ["Bir gün\ntelefon\ncevap vermedi.", "cevap", 2.4],
+      ["Bugün ara.\nİki dakika.", "ara.", 2.4],
+      ["Gururunu\nsonra taşırsın.", "sonra", 2.4]
     ],
-    "reel_aciklama": "Alkış bekledim, vakit kaybettim. 🎩\n\nSokak Dersi #27\nBunu kimse görmeden çalışan birine gönder.\nYarın #28 — takip et, kaçırma.\n\n#emek #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Aramayı hep erteledim. Bir gün telefon cevap vermedi. 🎩\n\nSokak Dersi #27\nBunu annesini bugün arayacak birine gönder.\nYarın #28 — takip et, kaçırma.\n\n#anne #sokakdersi #hayatdersleri #motivasyon #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
@@ -440,13 +439,30 @@
     "bicim": "harman",
     "ses": true,
     "reel": [
+      ["Kimse\nalkışlamıyorsa\nyine çalış.", "çalış.", 2.4],
+      ["Ben alkış\nbekledim,\nvakit kaybettim.", "kaybettim.", 2.4],
+      ["Alkış\ngeç gelir.", "geç", 2.4],
+      ["Ama emek\nhiç unutmaz.", "emek", 2.4],
+      ["Sus.\nÇalış.\nBekle.", "Bekle.", 2.4]
+    ],
+    "reel_aciklama": "Alkış bekledim, vakit kaybettim. 🎩\n\nSokak Dersi #28\nBunu kimse görmeden çalışan birine gönder.\nYarın #29 — takip et, kaçırma.\n\n#emek #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "kart": "",
+    "kart_vurgu": "",
+    "kart_aciklama": ""
+  },
+  {
+    "tarih": "2026-11-25",
+    "no": 29,
+    "bicim": "harman",
+    "ses": true,
+    "reel": [
       ["Haksızsan\nözür dile.", "özür", 2.4],
       ["Ben gençken\nözrü\nzayıflık sandım.", "zayıflık", 2.4],
       ["Gururum yüzünden\nbir kardeş\nkaybettim.", "kardeş", 2.4],
       ["Özür dileyen\nküçülmez.", "küçülmez.", 2.4],
       ["Büyür.", "Büyür.", 2.4]
     ],
-    "reel_aciklama": "Gururum yüzünden bir kardeş kaybettim. 🎩\n\nSokak Dersi #28\nBunu hatasını kabul edebilen birine gönder.\nYarın #29 — takip et, kaçırma.\n\n#özür #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Gururum yüzünden bir kardeş kaybettim. 🎩\n\nSokak Dersi #29\nBunu hatasını kabul edebilen birine gönder.\nYarın #30 — takip et, kaçırma.\n\n#özür #sokakdersi #hayatdersleri #motivasyon #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""

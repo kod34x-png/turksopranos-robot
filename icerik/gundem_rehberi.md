@@ -20,3 +20,7 @@ Olay açıkça anlatılmaz, adı konmaz; ama o gün haberi gören herkes "bu o m
 - `araclar/ozgur_ses.py <ses-klonu/referans> <klasör> "satır1" ...` — benzerlik 0.9 altındaki satırı yeniden yaz/üret.
 - Çıktılar 44.1 kHz'e çevrilip `medya/ses/<TARİH>/s0.wav ...` olarak konur; takvim girdisine `"hazir_ses": true` ve `"gundem": "..."` eklenir.
 - Özgür'ün referansları/modeli bu depoya **asla** konmaz (depo herkese açık). Sadece bitmiş satır sesleri konur.
+
+## Elle hazırlanmış günler
+- Takvimde `"bicim": "hazir_video"` olan güne dokunma: videosu `medya/<TARİH>-reel.mp4` olarak Özgür'ün onayıyla hazır konmuştur
+  (ilki 21 Kasım 2026, Sokak Dersi #25 "FON / DİP"). Gündem videosu o gün üretilmez; sonraki günden devam edilir.
