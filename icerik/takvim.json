@@ -369,14 +369,16 @@
     "no": 24,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "20 Kasım: İstanbul'da lodos (sarı kod) + küresel borsalarda sert düşüş",
     "reel": [
-      ["Etrafındaki\nbeş kişiye bak.", "beş", 2.4],
-      ["Sen onların\nortalamasısın.", "ortalamasısın.", 2.4],
-      ["Ben yanlış\nmasalarda\noturdum.", "yanlış", 2.4],
-      ["Kalkmak\nyıllarımı aldı.", "yıllarımı", 2.4],
-      ["Masanı\nbugün seç.", "bugün", 2.4]
+      ["Bugün\nlodos esti.", "lodos", 2.4],
+      ["Kimisinin çatısı uçtu,\nkimisinin parası.", "parası.", 2.4],
+      ["Ben gençken\nrüzgâra göre\ndönerdim.", "rüzgâra", 2.4],
+      ["Rüzgâra göre dönen\nfırıldaktır.", "fırıldaktır.", 2.4],
+      ["Kökü olan ağaç\neğilir.\nAma kırılmaz.", "kırılmaz.", 2.4]
     ],
-    "reel_aciklama": "Yanlış masalarda oturdum. Kalkmak yıllarımı aldı. 🎩\n\nSokak Dersi #24\nBunu doğru masayı seçmiş birine gönder.\nYarın #25 — takip et, kaçırma.\n\n#dostluk #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Bugün lodos esti. Kimisinin çatısı uçtu, kimisinin parası. 🎩\n\nSokak Dersi #24\nBunu bugün sarsılan birine gönder.\nYarın #25 — takip et, kaçırma.\n\n#lodos #istanbul #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""

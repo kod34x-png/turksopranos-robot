@@ -395,8 +395,15 @@ KOK = os.path.dirname(BURASI)
 def _komut(*a):
     subprocess.run(list(a), check=True)
 
-def harman_satir_sesi(metin, yol_ham, yol):
+def harman_satir_sesi(metin, yol_ham, yol, hazir=None):
     import asyncio, edge_tts
+    if hazir and os.path.exists(hazir):          # 20 Kasım 2026: Özgür'ün kendi ses klonuyla önceden üretilmiş satır
+        kirp = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02"
+        zincir = (f"aresample=44100,{kirp},areverse,{kirp},areverse,highpass=f=60,equalizer=f=120:t=q:w=1:g=3,"
+                  "equalizer=f=2800:t=q:w=1.5:g=2,lowpass=f=9500,acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2,"
+                  "aformat=channel_layouts=stereo")
+        _komut("ffmpeg", "-y", "-v", "error", "-i", hazir, "-af", zincir, "-ar", "44100", yol)
+        return ses_suresi(yol)
     for deneme in range(4):                          # edge-tts ara sıra boş döner: tekrar dene
         try:
             asyncio.run(edge_tts.Communicate(metin, HARMAN_SES, rate=HARMAN_ORAN, pitch=HARMAN_PITCH).save(yol_ham))
@@ -452,7 +459,8 @@ def reel_harman():
     parcalar, zam, t = [], [], 0.15
     for i, (metin, _, _) in enumerate(satirlar):
         p = os.path.join(tmp, f"s{i}.wav")
-        d = harman_satir_sesi(metin.replace("\n", " ").replace("...", "").strip(), os.path.join(tmp, f"s{i}.mp3"), p)
+        hazir = os.path.join(KOK, "medya/ses", gun["tarih"], f"s{i}.wav") if gun.get("hazir_ses") else None
+        d = harman_satir_sesi(metin.replace("\n", " ").replace("...", "").strip(), os.path.join(tmp, f"s{i}.mp3"), p, hazir)
         parcalar.append(p); zam.append((t, t + d)); t += d + 0.32
     govde = zam[-1][1] + 0.45; KART = 2.4; TOP = round(govde + KART, 2)
     liste = os.path.join(tmp, "liste.txt")
