@@ -1,8 +1,7 @@
 name: Takip Olcer
 # 15 Kasım 2026: her Reel'den sonraki saatlerde takipçi sayısını saat başı kaydeder (20:15–03:15 TR).
+# 22 Kasım 2026: zamanlayıcı kapatıldı; ölçümü takip-dongu.yml yapıyor. Elle tek ölçüm için duruyor.
 on:
-  schedule:
-    - cron: "15 17-23,0 * * *"
   workflow_dispatch:
 permissions:
   contents: write

@@ -58,7 +58,9 @@ def bekle(cid, ad):
 # Yapay zekâ etiketi (15 Kasım 2026): harman Reel'ler kabadayı görüntüsü içerdiği için "AI info" etiketi gönderilir.
 # Parametre reddedilirse etiketsiz tekrar denenir (yayın durmaz) ve sonuç sonuc.json'a yazılır.
 _meta = f"medya/{gun['tarih']}-meta.json"
-AI_ETIKET = (json.load(open(_meta, encoding="utf-8")).get("bicim") if os.path.exists(_meta) else gun.get("bicim", "harman")) == "harman"
+# 22 Kasım 2026 (K2): yapay zekâ görüntüsü kullanan elle hazırlanmış videolar da etiketlenir (#25'te etiket gitmemişti)
+_bicim = json.load(open(_meta, encoding="utf-8")).get("bicim") if os.path.exists(_meta) else gun.get("bicim", "harman")
+AI_ETIKET = _bicim in ("harman", "hazir_video") or bool(gun.get("ai"))
 
 def _yukle(params):
     try:

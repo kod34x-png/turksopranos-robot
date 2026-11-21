@@ -1,0 +1,50 @@
+name: Takip Dongu
+# 22 Kasım 2026 (K1): GitHub zamanlayıcısı saatlik takip ölçümlerinin çoğunu atlıyordu (7 günde 56 ölçümden 11'i).
+# Bu iş, Reel yayınlandıktan sonra tek bir koşuda 6 saat açık kalır ve 30 dakikada bir takipçi sayısını ölçer.
+# Depo herkese açık: Actions dakikası ücretsiz. Yalnız okuma yapar.
+on:
+  workflow_run:
+    workflows: ["Gunluk Yayin"]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: takip-dongu
+  cancel-in-progress: false
+jobs:
+  dongu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 358
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bugün Reel atıldı mı, döngü zaten çalıştı mı?
+        id: kontrol
+        run: |
+          python3 - <<'PY'
+          import json, os, datetime
+          bugun = (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%Y-%m-%d")
+          y = json.load(open("durum/yayinlanan.json")) if os.path.exists("durum/yayinlanan.json") else []
+          atildi = any(k.get("tarih") == bugun and k.get("reel_id") for k in y if isinstance(k, dict))
+          son = open("durum/takip_dongu.txt").read().strip() if os.path.exists("durum/takip_dongu.txt") else ""
+          elle = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+          calis = elle or (atildi and son != bugun)
+          print("bugün", bugun, "reel atıldı:", atildi, "son döngü:", son, "->", calis)
+          open(os.environ["GITHUB_OUTPUT"], "a").write(f"calis={'evet' if calis else 'hayir'}\nbugun={bugun}\n")
+          PY
+      - name: Döngü (12 ölçüm, 30 dk arayla)
+        if: steps.kontrol.outputs.calis == 'evet'
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          git config user.name "turksopranos-robot"
+          git config user.email "robot@users.noreply.github.com"
+          echo "${{ steps.kontrol.outputs.bugun }}" > durum/takip_dongu.txt
+          git add durum/takip_dongu.txt && git commit -qm "Takip dongusu basladi" && git pull -q --rebase && git push -q || true
+          for n in $(seq 1 12); do
+            for i in 1 2 3; do git pull -q --rebase && break; sleep 5; done
+            python3 robot/takip.py || true
+            git add durum/takip_saatlik.json && git commit -qm "Takip olcumu" || true
+            for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 7; done
+            if [ $n -lt 12 ]; then sleep 1740; fi
+          done

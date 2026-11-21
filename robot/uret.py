@@ -430,7 +430,29 @@ def loudnorm_iki_gecis(giris, cikis, video_kopya=False):
     _komut("ffmpeg", "-y", "-v", "error", "-i", giris, *v, "-af", af, "-c:a", "aac", "-b:a", "192k", "-ar", "44100",
            "-movflags", "+faststart", cikis)
 
-def kutuphane_sec(adet, no):
+def son_kullanilanlar(tarih, gun_sayisi=7):
+    """22 Kasım 2026 (K3): son günlerin meta.json'larından kullanılan klipler ve kapanış klipleri."""
+    import datetime as _dt
+    hepsi, kapanis, yakin = {}, set(), set()
+    try:
+        t0 = _dt.date.fromisoformat(tarih)
+    except Exception:
+        return hepsi, kapanis, yakin
+    for g in range(1, gun_sayisi + 1):
+        m = os.path.join(KOK, "medya", f"{t0 - _dt.timedelta(days=g)}-meta.json")
+        if not os.path.exists(m):
+            continue
+        try:
+            kl = [k.replace(" (ayna)", "") for k in json.load(open(m, encoding="utf-8")).get("klipler", [])]
+        except Exception:
+            continue
+        for k in kl:
+            hepsi[k] = hepsi.get(k, 0) + 1
+            if g <= 3: yakin.add(k)
+        if kl: kapanis.add(kl[-1])
+    return hepsi, kapanis, yakin
+
+def kutuphane_sec(adet, no, tarih=None):
     yol = os.path.join(KOK, "medya/kabadayi/kutuphane.json")
     lst = [x for x in json.load(open(yol, encoding="utf-8")) if os.path.exists(os.path.join(KOK, x["dosya"]))
            and not x.get("kapali")]
@@ -438,6 +460,9 @@ def kutuphane_sec(adet, no):
         return None
     rng = np.random.default_rng(int(no) * 7919)
     sira = list(rng.permutation(len(lst)))
+    # 22 Kasım 2026 (K3): son 3 günde kullanılanlar sona, 7 günde az kullanılan öne
+    hepsi, kapanis, yakin = son_kullanilanlar(tarih) if tarih else ({}, set(), set())
+    sira.sort(key=lambda i: (lst[i]["dosya"] in yakin, hepsi.get(lst[i]["dosya"], 0)))
     kar = [lst[i] for i in sira if lst[i].get("karakter")]
     diger = [lst[i] for i in sira if not lst[i].get("karakter")]
     secim = (kar[:2] + diger[:1] + kar[2:] + diger[1:])          # ilk iki kesme mutlaka kabadayı
@@ -448,6 +473,14 @@ def kutuphane_sec(adet, no):
         if secim[i]["dosya"] == secim[i - 1]["dosya"]:
             j = next((j for j in range(i + 1, len(secim)) if secim[j]["dosya"] != secim[i - 1]["dosya"]), None)
             if j: secim[i], secim[j] = secim[j], secim[i]
+    # kapanış klibi son 7 günün kapanışlarından biri olmasın (K3)
+    if secim[-1]["dosya"] in kapanis:
+        aday = next((x for x in [lst[i] for i in sira] if x["dosya"] not in kapanis and x.get("karakter")
+                     and x["dosya"] != secim[-2]["dosya"] and x not in secim[:-1]), None) \
+            or next((x for x in [lst[i] for i in sira] if x["dosya"] not in kapanis
+                     and x["dosya"] != secim[-2]["dosya"]), None)
+        if aday:
+            secim[-1] = aday
     return secim
 
 def reel_harman():
@@ -475,7 +508,7 @@ def reel_harman():
     # 2) kesmeler: her satır bir kesme
     kes = [0.0] + [z[0] - 0.12 for z in zam[1:]]
     son = kes[1:] + [govde]
-    secim = kutuphane_sec(len(satirlar), gun["no"])
+    secim = kutuphane_sec(len(satirlar), gun["no"], gun.get("tarih"))
     # 3) yazı katmanları
     def gradyan():
         a = np.zeros((H, W), np.uint8)
