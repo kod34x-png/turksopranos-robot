@@ -129,5 +129,34 @@
   "karakter": true,
   "istem_no": 6,
   "not": "se-up of his weathered hands slowly turning dark prayer beads on a wooden table."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k007.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 7,
+  "not": "hadow, sitting in an old barbershop chair, mirror reflection, single warm light."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k008.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 8,
+  "not": "in shadow, standing at the rail of a Bosphorus ferry, seagulls, grey winter sky."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k009.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 9,
+  "not": "alf in shadow, reading an old folded newspaper at a small street kiosk at night."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k007.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 7,
+  "not": "klip: he looks into the mirror, slight head turn, slow push-in"
  }
 ]
