@@ -404,14 +404,17 @@
     "no": 26,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "22 Kasım: Kocaelispor–Fenerbahçe 2-2, geride kalınan maçta 90+3'te gelen beraberlik golü",
     "reel": [
-      ["Paranı\ngösterme,\nbiriktir.", "biriktir.", 2.4],
-      ["Ben kazandığımı\nherkese\ngösterdim.", "gösterdim.", 2.4],
-      ["Kötü gün geldi,\nkimse\ntanımadı.", "tanımadı.", 2.4],
-      ["Cebin dolu\nolsun,\nağzın kapalı.", "kapalı.", 2.4],
-      ["Gösteren\nçabuk biter.", "biter.", 2.4]
+      ["Dün gece maç\nuzatmada\ndöndü.", "uzatmada", 2.4],
+      ["Kimisi erken sevindi,\nkimisi erken küstü.", "erken", 2.4],
+      ["Ben gençken\nbitti sanıp\nyarışı bıraktım.", "yarışı", 2.4],
+      ["O yarışı\nbaşkası kazandı.", "başkası", 2.4],
+      ["Düdük çalmadan\nsahayı terk etme.", "sahayı", 2.4],
+      ["Son dakika\nsabredenindir.", "sabredenindir.", 2.4]
     ],
-    "reel_aciklama": "Kazandığımı herkese gösterdim. Kötü gün gelince kimse tanımadı. 🎩\n\nSokak Dersi #26\nBunu sessizce biriktiren birine gönder.\nYarın #27 — takip et, kaçırma.\n\n#para #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Bitti sanıp yarışı bıraktım. O yarışı başkası kazandı. 🎩\n\nSokak Dersi #26\nBunu son düdüğe kadar pes etmeyen birine gönder.\nYarın #27 — takip et, kaçırma.\n\n#futbol #sondakika #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""

@@ -40,3 +40,4 @@
 | K18 | 22 Kas | Gündem testi tutmazsa (28 Kas) Ahmet sesiyle harmana dönülür. 26–27 Kas gündem görevi metni değiştirir | Toplantı (tam yetki) | 28 Kas karnesi | ⏳ |
 | K19 | 22 Kas | ASMR testi 30 Kasım'a kadar sürer. 1 Aralık'tan itibaren varsayılan kapalı (taslakta asmr:false); testi kazanırsa açılır | Toplantı | 30 Kas | ⏳ |
 | K20 | 22 Kas | Özgür'ün elle işleri: #22'yi profile sabitle; YouTube anahtarları (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) | Özgür | — | ⏳ |
+| K21 | 22 Kas | Gündem #26: Kocaelispor–Fenerbahçe 90+3 beraberliği → "Düdük çalmadan sahayı terk etme" (Özgür'ün sesi, 6 satır) | Gündem görevi | 28 Kas karnesi (K11) | ⏳ |
