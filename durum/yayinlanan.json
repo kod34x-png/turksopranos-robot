@@ -200,5 +200,13 @@
   "ai_etiket_kontrol": true,
   "zaman": "2026-11-22T19:34:57Z",
   "hikaye_id": "18173694439498490"
+ },
+ {
+  "tarih": "2026-11-23",
+  "no": 27,
+  "ai_etiket": "gonderildi",
+  "reel_id": "18114252065182743",
+  "ai_etiket_kontrol": true,
+  "zaman": "2026-11-23T17:37:28Z"
  }
 ]
