@@ -158,5 +158,34 @@
   "karakter": true,
   "istem_no_klip": 7,
   "not": "klip: he looks into the mirror, slight head turn, slow push-in"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k010.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 10,
+  "not": "riking a match in a dark room, his face lit from below, eyes under the cap brim."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k011.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 11,
+  "not": "lf in shadow, walking up old stone stairs in Beyoglu, seen from behind, evening."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k012.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 12,
+  "not": "itchen table at night looking at an old black and white photograph, single lamp."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k010.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 10,
+  "not": "klip: the match flares and burns, smoke curls, very slow push-in"
  }
 ]
