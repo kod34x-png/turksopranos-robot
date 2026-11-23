@@ -424,14 +424,17 @@
     "no": 27,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "23 Kasım: Meteoroloji'nin 21 il için sarı kodlu kuvvetli yağış, fırtına ve kar uyarısı",
     "reel": [
-      ["Annenin\nsesini duymak\nhâlâ mümkünse...", "mümkünse...", 2.4],
-      ["Ben aramayı\nhep erteledim.", "erteledim.", 2.4],
-      ["Bir gün\ntelefon\ncevap vermedi.", "cevap", 2.4],
-      ["Bugün ara.\nİki dakika.", "ara.", 2.4],
-      ["Gururunu\nsonra taşırsın.", "sonra", 2.4]
+      ["Bugün\ngökyüzü\nuyardı.", "uyardı.", 2.4],
+      ["Uyarıyı duyan\nhazırlanır,\nduymayan ıslanır.", "ıslanır.", 2.4],
+      ["Ben gençken\nşemsiyeyi\nhep unuttum.", "şemsiyeyi", 2.4],
+      ["Bulut gördüm,\ngeçer dedim.", "geçer", 2.4],
+      ["Fırtına\nhaber vererek gelir.\nKulak ver.", "Kulak", 2.4],
+      ["Çatını\nyağmurdan önce\nonar.", "onar.", 2.4]
     ],
-    "reel_aciklama": "Aramayı hep erteledim. Bir gün telefon cevap vermedi. 🎩\n\nSokak Dersi #27\nBunu annesini bugün arayacak birine gönder.\nYarın #28 — takip et, kaçırma.\n\n#anne #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Fırtına haber vererek gelir. Çatını yağmurdan önce onar. 🎩\n\nSokak Dersi #27\nBunu uyarılara kulak tıkayan birine gönder.\nYarın #28 — takip et, kaçırma.\n\n#fırtına #sarıkod #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
