@@ -444,14 +444,17 @@
     "no": 28,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "24 Kasım: Öğretmenler Günü",
     "reel": [
-      ["Kimse\nalkışlamıyorsa\nyine çalış.", "çalış.", 2.4],
-      ["Ben alkış\nbekledim,\nvakit kaybettim.", "kaybettim.", 2.4],
-      ["Alkış\ngeç gelir.", "geç", 2.4],
-      ["Ama emek\nhiç unutmaz.", "emek", 2.4],
-      ["Sus.\nÇalış.\nBekle.", "Bekle.", 2.4]
+      ["Bugün\ntebeşir kokusu\ngeldi burnuma.", "tebeşir", 2.4],
+      ["Bana harf öğreten,\nhayatı da\nöğretti.", "harf", 2.4],
+      ["Ben gençken\nhocamı\ndinlemedim.", "dinlemedim.", 2.4],
+      ["Sokak öğretti\nsonra.\nAma pahalıya.", "pahalıya.", 2.4],
+      ["Sana bir harf\nöğretene\nselam ver.", "selam", 2.4],
+      ["Ders bitmez.\nHoca değişir.", "Hoca", 2.4]
     ],
-    "reel_aciklama": "Alkış bekledim, vakit kaybettim. 🎩\n\nSokak Dersi #28\nBunu kimse görmeden çalışan birine gönder.\nYarın #29 — takip et, kaçırma.\n\n#emek #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Ben gençken hocamı dinlemedim. Sokak öğretti sonra, ama pahalıya. 🎩\n\nSokak Dersi #28\nBunu sana bir harf öğretmiş birine gönder.\nYarın #29 — takip et, kaçırma.\n\n#öğretmenlergünü #24kasım #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
