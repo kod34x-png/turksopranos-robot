@@ -187,5 +187,34 @@
   "karakter": true,
   "istem_no_klip": 10,
   "not": "klip: the match flares and burns, smoke curls, very slow push-in"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k013.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 13,
+  "not": "ow, standing in front of a closed metal shop shutter on an empty street at dawn."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k014.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 14,
+  "not": ", placing his hand on a young man's shoulder, both seen from behind, city below."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k015.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 15,
+  "not": "hadow, extreme close-up of his eyes under the brim of the flat cap, deep shadow."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k013.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 13,
+  "not": "klip: he stands still, breath visible in cold air, slow push-in"
  }
 ]
