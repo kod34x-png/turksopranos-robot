@@ -464,14 +464,17 @@
     "no": 29,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "25 Kasım: Galatasaray'ın Şampiyonlar Ligi'nde Aston Villa'yı 1-0 yenerek üst üste üçüncü galibiyetini alması",
     "reel": [
-      ["Haksızsan\nözür dile.", "özür", 2.4],
-      ["Ben gençken\nözrü\nzayıflık sandım.", "zayıflık", 2.4],
-      ["Gururum yüzünden\nbir kardeş\nkaybettim.", "kardeş", 2.4],
-      ["Özür dileyen\nküçülmez.", "küçülmez.", 2.4],
-      ["Büyür.", "Büyür.", 2.4]
+      ["Dün gece\ntek gol\nyetti.", "tek", 2.4],
+      ["Çok konuşan değil,\nfileyi bulan\nkazanır.", "fileyi", 2.4],
+      ["Ben gençken\nhep büyük vuruş\naradım.", "büyük", 2.4],
+      ["Topu kaçırdım.\nMaçı da.", "Maçı", 2.4],
+      ["Bir galibiyet\nşans olur.", "şans", 2.4],
+      ["Üst üste üç tane\nkarakterdir.", "karakterdir.", 2.4]
     ],
-    "reel_aciklama": "Gururum yüzünden bir kardeş kaybettim. 🎩\n\nSokak Dersi #29\nBunu hatasını kabul edebilen birine gönder.\nYarın #30 — takip et, kaçırma.\n\n#özür #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Bir galibiyet şans olur. Üst üste üç tane karakterdir. 🎩\n\nSokak Dersi #29\nBunu her hafta sahaya yeniden çıkan birine gönder.\nYarın #30 — takip et, kaçırma.\n\n#tekgol #üstüste #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
