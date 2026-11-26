@@ -484,14 +484,17 @@
     "no": 30,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "26 Kasım: Altın fiyatlarının sert düşüşle 13-14 ayın en düşük seviyesine inmesi (gram altın 6 bin TL'nin altını gördü)",
     "reel": [
-      ["Acele eden\nbedeli\nikiye öder.", "ikiye", 2.4],
-      ["Ben bir dükkânı\nüç ayda açtım,", "açtım,", 2.4],
-      ["altı ayda\nkapattım.", "kapattım.", 2.4],
-      ["İkincisini\niki yılda kurdum.", "kurdum.", 2.4],
-      ["Hâlâ\nayakta.", "ayakta.", 2.4]
+      ["Bugün\nparlayan bir şey\ndüştü.", "parlayan", 2.4],
+      ["Herkes onu\nsağlam\nsanıyordu.", "sağlam", 2.4],
+      ["Ben gençken\nbütün birikimimi\ntek yere koydum.", "tek", 2.4],
+      ["Bir sabah\nyarısı\ngitmişti.", "yarısı", 2.4],
+      ["Parlaklığa değil,\ndayanmaya\nbak.", "dayanmaya", 2.4],
+      ["Değer\ninsanda kalır.", "insanda", 2.4]
     ],
-    "reel_aciklama": "Dükkânı üç ayda açtım, altı ayda kapattım. İkincisini iki yılda kurdum. 🎩\n\nSokak Dersi #30\nBunu her şeyi hemen isteyen birine gönder.\nYarın #31 — takip et, kaçırma.\n\n#sabır #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Ben gençken bütün birikimimi tek yere koydum. Bir sabah yarısı gitmişti. 🎩\n\nSokak Dersi #30\nBunu her şeyini tek sepete koyan birine gönder.\nYarın #31 — takip et, kaçırma.\n\n#altın #birikim #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
