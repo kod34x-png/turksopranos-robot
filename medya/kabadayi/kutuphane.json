@@ -216,5 +216,34 @@
   "karakter": true,
   "istem_no_klip": 13,
   "not": "klip: he stands still, breath visible in cold air, slow push-in"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k016.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 16,
+  "not": "dow, pouring tea from a double teapot into a tulip glass in a small old kitchen."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k017.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 17,
+  "not": "lf in shadow, sitting on a wooden ferry bench looking at the sea at golden hour."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k018.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 18,
+  "not": ", walking through an empty covered bazaar at night, closed shops, hanging lamps."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k016.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 16,
+  "not": "klip: tea pours into the glass, steam rises"
  }
 ]
