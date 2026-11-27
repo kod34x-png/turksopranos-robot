@@ -504,14 +504,17 @@
     "no": 31,
     "bicim": "harman",
     "ses": true,
+    "hazir_ses": true,
+    "gundem": "27 Kasım: Efsane Cuma (Black Friday) indirim günü; indirimli görünen ürünlerin önemli kısmının gerçekte ucuzlamadığı tespiti",
     "reel": [
-      ["Söz verdiğin\nsaatte\norada ol.", "orada", 2.4],
-      ["Ben bir gün\nbeş dakika\ngeç kaldım.", "geç", 2.4],
-      ["Adam beklemedi.\nİşi başkası aldı.", "başkası", 2.4],
-      ["Beş dakika\nbana\nbeş yıla mal oldu.", "mal", 2.4],
-      ["Saatin\nsenin imzandır.", "imzandır.", 2.4]
+      ["Bugün\nher vitrin\nbağırıyor.", "vitrin", 2.4],
+      ["Yarı fiyat diyorlar.\nYarısı\nyalan.", "yalan.", 2.4],
+      ["Ben gençken\nucuz diye\nher şeyi aldım.", "ucuz", 2.4],
+      ["Ucuz aldım,\npahalı ödedim.", "pahalı", 2.4],
+      ["İhtiyacın yoksa\nbedavası bile\npahalıdır.", "bedavası", 2.4],
+      ["Cebini değil,\naklını\ndoldur.", "aklını", 2.4]
     ],
-    "reel_aciklama": "Beş dakika geç kaldım. Bana beş yıla mal oldu. 🎩\n\nSokak Dersi #31\nBunu sözünün saatine sadık birine gönder.\nYarın #32 — takip et, kaçırma.\n\n#söz #sokakdersi #hayatdersleri #motivasyon #türksopranos",
+    "reel_aciklama": "Ucuz aldım, pahalı ödedim. İhtiyacın yoksa bedavası bile pahalıdır. 🎩\n\nSokak Dersi #31\nBunu sepeti dolu, cebi boş birine gönder.\nYarın #32 — takip et, kaçırma.\n\n#efsanecuma #indirim #sokakdersi #hayatdersleri #türksopranos",
     "kart": "",
     "kart_vurgu": "",
     "kart_aciklama": ""
