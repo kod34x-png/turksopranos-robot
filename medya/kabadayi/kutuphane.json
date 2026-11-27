@@ -245,5 +245,27 @@
   "karakter": true,
   "istem_no_klip": 16,
   "not": "klip: tea pours into the glass, steam rises"
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k019.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 19,
+  "not": "lf in shadow, standing under a black umbrella in heavy rain at an old tram stop."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k020.png",
+  "tur": "kare",
+  "karakter": true,
+  "istem_no": 20,
+  "not": "tting silently on a park bench at dusk beside an old friend, both looking ahead."
+ },
+ {
+  "dosya": "medya/kabadayi/kutuphane/k019.mp4",
+  "tur": "klip",
+  "bas": 0.2,
+  "karakter": true,
+  "istem_no_klip": 19,
+  "not": "klip: rain pours, the umbrella drips, a tram light passes"
  }
 ]
